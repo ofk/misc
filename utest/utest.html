@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>utest</title>
+</head>
+<body></body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+utest("test", {
+  right1: function () {
+    return true;
+  },
+  right2: function () {
+    return [ [true], [1, 1], [1, "==", "1"] ];
+  },
+  right3: function (test) {
+    setTimeout(function () { test(true); }, 1000);
+  },
+  right4: function (test) {
+    setTimeout(function () { test([ [true], [1, 1], [1, "==", "1"] ]); }, 1000);
+  },
+  stand: function () {
+  },
+  wrong: function () {
+    return false;
+  },
+  error: function () {
+    throw new Error("msg");
+  }
+});
+</script>
+</html>
