@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>utest</title>
+<script type="text/javascript" src="dirty.js"></script>
+</head>
+<body></body>
+<script type="text/javascript" src="../utest/utest.js"></script>
+<script type="text/javascript">
+utest("istype", [
+	[[ "undefined", "===", istype(void 0) ]],
+	[[ "boolean", "===", istype(true) ]],
+	[[ "boolean", "===", istype(new Boolean("abc")) ]],
+	[[ "number", "===", istype(123) ]],
+	[[ "number", "===", istype(0.123) ]],
+	[[ "number", "===", istype(new Number(true)) ]],
+	[[ "string", "===", istype("abcde") ]],
+	[[ "string", "===", istype(new String(123)) ]],
+	[[ "regexp", "===", istype(/abcde/) ]],
+	[[ "regexp", "===", istype(new RegExp("abc", "g")) ]],
+	[[ "array", "===", istype([]) ]],
+	[[ "array", "===", istype(new Array(10)) ]],
+	[[ "array", "===", istype(document.getElementsByTagName("*")) ]],
+	[[ "function", "===", istype(function () {}) ]],
+	[[ "function", "===", istype(new Function("_","return _;")) ]],
+	[[ "function", "===", istype(Number) ]],
+	[[ "function", "===", istype(parseInt) ]],
+	[[ "date", "===", istype(new Date) ]],
+	[[ "null", "===", istype(null) ]],
+	[[ "window", "===", istype(window) ]],
+	[[ "node", "===", istype(document.body) ]],
+	[[ "object", "===", istype({}) ]]
+]);
+// テスト不完全
+</script>
+</html>
