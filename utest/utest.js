@@ -87,6 +87,10 @@ function isFunction(obj) {
 	return Object.prototype.toString.call(obj) === "[object Function]";
 }
 
+function isArray(obj) {
+	return Object.prototype.toString.call(obj) === "[object Array]";
+}
+
 function args(a) {
 	a = Array.prototype.slice.call(a);
 	if (typeof a[0] === "object") {
@@ -134,6 +138,11 @@ utest.test = function (name, tests, interval, timeout) {
 		var self = this;
 		(function loop(i) {
 			if (i >= tests.length) return;
+			if (isArray(tests[i])) {
+				tests[i] = (function (test) {
+					return function () { return test };
+				})(tests[i]);
+			}
 			if (!isFunction(tests[i])) {
 				loop(i + 1);
 			}
@@ -154,6 +163,11 @@ utest.test = function (name, tests, interval, timeout) {
 	}
 	else {
 		for (var i = 0, iz = tests.length; i < iz; ++i) {
+			if (isArray(tests[i])) {
+				tests[i] = (function (test) {
+					return function () { return test };
+				})(tests[i]);
+			}
 			if (isFunction(tests[i])) {
 				this.test(isFunction(tests[i - 1]) ? null : tests[i - 1], tests[i]);
 			}
@@ -188,11 +202,11 @@ utest.test.prototype = {
 	judge: function (res) {
 		function text(v1, op, v2) {
 			if (!op)
-				return "(" + utest.type(v1) + ") " + v1;
+				return "(" + utest.type(v1) + ") " + dump(v1);
 			return [
-				"(" + utest.type(v1) + ")", v1,
+				"(" + utest.type(v1) + ")", dump(v1),
 				op,
-				"(" + utest.type(v2) + ")", v2
+				"(" + utest.type(v2) + ")", dump(v2)
 			].join(" ");
 		}
 		if (res === void 0) {
