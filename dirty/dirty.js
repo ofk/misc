@@ -99,6 +99,10 @@ MIX(window_, {
 	gid: function (id, context) {
 		return (context || document).getElementById(id);
 	},
+	toi: function (str) {
+		if (typeof str === "number") return str;
+		return parseInt((/-?\d+/.exec(str) || [])[0], 10);
+	},
 	$$: function (selector, context) {
 		return CAST_ARRAY_.call((context || document).querySelectorAll(selector));
 	},
@@ -576,6 +580,7 @@ MIX(Function_prototype_, {
 	}
 });
 
+EXT(Function, "bind limit loop");
 
 // -------------------------------------------------------------------
 // Object
