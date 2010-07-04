@@ -115,6 +115,69 @@ function $_dump(obj, indent) {
 
 
 /*----------------------------------------------------------
+ * $.log
+ *--------------------------------------------------------*/
+
+$.log = $_log;
+$.showLog = $_showLog;
+$.clearLog = $_clearLog;
+
+var _log = "";
+
+function $_log() {
+	var elem = document.getElementById("$_log");
+	if (!elem && document.body) {
+		elem = document.createElement("div");
+		elem.id = "$_log";
+		$(elem).css({
+			padding: "20px",
+			position: "fixed",
+			top: "10%",
+			right: "10%",
+			bottom: "10%",
+			left: "10%",
+			zIndex: "99999",
+			backgroundColor: "#ffc",
+			display: "none"
+		}).append($('<textarea>').css({
+			width: "100%",
+			height: "100%"
+		}));
+		document.body.appendChild(elem);
+		$(document).keydown(function (evt) {
+			evt.keyCode === 46 && $(elem).toggle(500);
+		});
+	}
+	var A = Array.prototype.slice.call(arguments),
+	    R = [];
+
+	if (A.length > 0) {
+		for (var i = 0, iz = A.length; i < iz; ++i) {
+			var o = A[i], t = $.type(o);
+			R[i] = t === "string" || t === "number" ? o : "(" + t + ") " + $.dump(o);
+		}
+		R = R.join("\n");
+		var t, D = new Date;
+		_log = ((t = D.getHours())   > 9 ? "" : "0") + t + ":"
+		     + ((t = D.getMinutes()) > 9 ? "" : "0") + t + ":"
+		     + ((t = D.getSeconds()) > 9 ? "" : "0") + t + ">"
+		     + (R.indexOf("\n") > -1 ? "\n" : " ") + R + "\n" + _log;
+	}
+
+	elem && $("textarea", elem).val(_log);
+}
+
+function $_showLog() {
+	$(document.getElementById("$_log")).show(500);
+}
+
+function $_clearLog() {
+	var elem = document.getElementById("$_log");
+	elem && $("textarea", elem).val("");
+}
+
+
+/*----------------------------------------------------------
  * $.klass
  * クラスの生成。
  *--------------------------------------------------------*/
@@ -181,6 +244,29 @@ function $_klass(parent, methods) {
 		return fn;
 	}
 }
+
+/*
+function $_klass(parent, methods) {
+	if (typeof parent === "object") {
+		methods = parent;
+		parent = null;
+	}
+	function klass() {
+		this.klass = klass;
+		this.init && this.init.apply(this, arguments);
+	}
+	if (parent) {
+		function tmp() {}
+		tmp.prototype = parent.prototype;
+		klass.prototype = new tmp;
+		klass.prototype.parent = parent.prototype;
+		klass.prototype.parent.constructor = parent;
+		klass.prototype.constructor = klass;
+	}
+	methods && $.extend(klass.prototype, methods);
+	return klass;
+}
+*/
 
 /*----------------------------------------------------------
  * $.fn.iff
