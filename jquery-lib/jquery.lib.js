@@ -184,7 +184,7 @@ function $_clearLog() {
 
 $.klass = $_klass;
 
-
+//*
 function $_klass(parent, methods) {
 	if (typeof parent === "object") {
 		methods = parent;
@@ -238,14 +238,14 @@ function $_klass(parent, methods) {
 		fn.parent = sp;
 		for (var i in pp) if ($_type(pp[i]) === "function") {
 			fn[i] = (function (name) {
-				return function () { return fn/*self.parent*/(name, arguments); };
+				return function () { return fn(name, arguments); }; // fn = self.parent
 			})(i);
 		}
 		return fn;
 	}
 }
 
-/*
+/*/
 function $_klass(parent, methods) {
 	if (typeof parent === "object") {
 		methods = parent;
@@ -266,7 +266,7 @@ function $_klass(parent, methods) {
 	methods && $.extend(klass.prototype, methods);
 	return klass;
 }
-*/
+//*/
 
 /*----------------------------------------------------------
  * $.fn.iff
