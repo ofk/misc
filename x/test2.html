@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>CSS TEST 2</title>
+<link rel="stylesheet" type="text/css" href="x.css" media="all" />
+</head>
+<body>
+
+<h1>Default Style Sheet</h1>
+<p>Ohh... Alphabet tte iiyonaa... Ippai kirei na Font arusi. tiisakutemo yomiyasuisi. zukkoi Death... MS gothic ha mou akitayo. motto Design sasero-!!!</p>
+<p>a.. souieba Windows Vista de New Font demasune. Meiryo toka iuyatu. Flash8 demo tukawareteru New Anti-alias technology <em>ClearType</em> wo zentei to site tukurareta Font datte. miyasui hazudawa</p>
+<div class="textBody" id="extended">
+	<h2>Text Module</h2>
+	<p>各(モダン)ブラウザーで、フォントサイズや余白を出来るだけ揃えました。また、テーブルやフォームなどは簡素ですが、自分の良く使う見栄えに整形しています。いつもここから色やボーダー、余白を調整してサイトの基礎部分を作っています。</p>
+	<p>このXHTML文書は、各要素の見栄えをチェックするために作ったので、内容的に意味のあるものではありません。無理やり色々な要素を出現させていたりしてますしー。</p>
+
+	<p>いきなり<strong>Strong!</strong></p>
+	<p>kbd要素 <kbd>Enter</kbd> <kbd>Tab</kbd> <kbd>Shift</kbd>, kbd.accesskey <kbd class="accesskey">P</kbd> <kbd class="accesskey">H</kbd> <kbd class="accesskey">N</kbd></p>
+
+	<p>これはP要素です。P要素のPはパラグラフ［<em>P</em>aragraph］のPで、長い文章の中の、一つの主題をもってまとまった部分、日本語では段落と訳されております。abbr要素→<abbr title="Hyper Text Markup Language">HTML</abbr>では code要素→<code>&lt;p&gt;文章&lt;/p&gt;</code>と書きます。 </p>
+	<p>段落は１つのセンテンスを持ちます。センテンスとは、その段落の主張を一文でまとめたもので、センテンスのある上手な文章ならば、長い段落でも数秒で内容が把握できます。したがって、センテンスは段落の先頭に持ってくるのが良いとされています。</p>
+		<blockquote title="blockquote要素 wuのぼやき" cite="http://numerous.org/bazooka/">
+			<p>Ohh... Alphabet tte iiyonaa... Ippai kirei na Font arusi. tiisakutemo yomiyasuisi. zukkoi Death... MS gothic ha mou akitayo. motto Design sasero-!!!
+				Ohh... Alphabet tte iiyonaa... Ippai kirei na Font arusi. tiisakutemo yomiyasuisi. zukkoi Death... MS gothic ha mou akitayo. motto Design sasero-!!!</p>
+
+			<ul>
+				<li>aaaaaaa</li>
+				<li>bbbbbbb</li>
+			</ul>
+		</blockquote>
+	<p>上は引用した文章、blockquote要素。</p>
+	<h2>Edit Module</h2>
+
+	<p>貴方はIE6.0を使っているんですかぁ、del要素→<del datetime="2006-04-02T01:16:10+09:00">&quot;私も同じくずっとIE6.0を使ってますー。使い慣れてるのが一番ですもんねぇ、</del>　ins要素→<ins datetime="2006-04-02T01:16:10+09:00">(現在はFirefoxを使用しています)</ins>、FirefoxのIE6と違う点といったら、タブブラウザーなことですかねー。タブは便利ですねー。Firefox用の沢山のPluginが出てるのもいいですねぇ。</p>
+	<h2>List Module</h2>
+	<h3>ul, ol, li</h3>
+	<p>今僕が欲しいものは</p>
+	<ol>
+
+		<li><a href="http://www.mitsubishielectric.co.jp/home/range/m4b/index_i.html">電子レンジ</a></li>
+		<li><a href="http://zozo.jp/shop/stless/goods.html?cid=544&amp;KID=40146100">Nixson</a>の腕時計</li>
+		<li>にゅーPC<a href="http://www.eizo.co.jp/products/lcd/s1910/index.html"></a></li>
+	</ol>
+	<p>項目はli要素、項目に順序があるなら外側をolで囲います。項目が並列の関係ならば、ulで囲います。</p>
+<pre title="pre要素">
+&lt;ul id=&quot;utilities&quot;&gt;
+
+ &lt;li&gt;Entries AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  &lt;ul&gt;
+   &lt;li&gt;Entry1&lt;/li&gt;
+   &lt;li&gt;Entry2&lt;/li&gt;
+   &lt;li&gt;Entry3&lt;/li&gt;
+
+  &lt;/ul&gt;
+ &lt;/li&gt;
+&lt;li&gt;Categories
+   &lt;ul&gt;
+    &lt;li&gt;<em>Category1</em>&lt;/li&gt;
+    &lt;li&gt;Category2&lt;/li&gt;
+
+    &lt;li&gt;Category3&lt;/li&gt;
+   &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+	<p>リストのネスト、ネストなリスト</p>
+
+	<p>リストが入れ子の状態になったときなどにフォントサイズが小さくなりすぎないように指定しています。</p>
+	<ul>
+		<li>About
+			<ul>
+				<li>This site</li>
+				<li>My Profile</li>
+			</ul>
+		</li>
+
+		<li>Categories
+			<ul>
+				<li>Diary</li>
+				<li>Movable Type</li>
+				<li>Artworks</li>
+				<li>XHTML/CSS</li>
+				<li>Links</li>
+
+			</ul>
+		</li>
+		<li>Guest Book</li>
+		<li>Links
+			<p>LIの中にP要素P要素P要素P要素P要素</p>
+			<dl>
+				<dt>LIの中にDT定義タイトル</dt>
+				<dd>LIの中にDD定義説明</dd>
+
+			</dl>
+			<ul>
+				<li>ABCDE cup</li>
+				<li>ABCDE cup</li>
+				<li>ABCDE cup</li>
+				<li>Fantasista CUP
+					<ul>
+						<li>ABCDE cup</li>
+
+						<li>ABCDE cup</li>
+						<li>ABCDE cup</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<h3>dl, dt, dd</h3>
+
+	<dl>
+		<dt>誰かさん</dt>
+		<dd>ねぇねぇウータンてA型でしょ</dd>
+		<dt>俺</dt>
+		<dd>おお、何でわかるの！</dd>
+		<dt>誰かさん</dt>
+
+		<dd>誰でもわかるよ。A型そのまんまって感じだよ。(笑</dd>
+		<dt>俺</dt>
+		<dd>残念、本当はO型でした。</dd>
+		<dt>誰かさん</dt>
+		<dd>え？O型!?　あ！あるある、そういうとこある～！(笑</dd>
+	</dl>
+
+	<p id="GRID">img要素 <a href="#GRID"><img src="http://dummyimage.com/50x50" alt="a" width="50" height="50" /></a></p>
+	<h2>Table Module</h2>
+	<p>Yahoo UI Library Fonts CSSでは、body要素のフォントサイズに13pxの基準値を指定し、他の要素はその基準値からの相対的なフォントサイズをパーセンテージで指定します。</p>
+	<table summary="過去3ヶ月 bazooka来訪者の使用ブラウザー上位４">
+		<caption>
+			ブラウザ使用率
+		</caption>
+		<tbody>
+
+			<tr>
+				<th>OS</th>
+				<th>パーセンテージ</th>
+			</tr>
+			<tr>
+				<td>IE6.0</td>
+				<td>74.84%</td>
+
+			</tr>
+			<tr>
+				<td> Firefox 1x</td>
+				<td>15.9%</td>
+			</tr>
+			<tr>
+				<td> Safari</td>
+
+				<td>3.35%</td>
+			</tr>
+			<tr>
+				<td> Opera</td>
+				<td>2.25%</td>
+			</tr>
+		</tbody>
+
+	</table>
+	<h1>Heading Level1</h1>
+	<h2>Heading Level2</h2>
+	<h3>Heading Level3</h3>
+	<h4>Heading Level4</h4>
+	<h5>Heading Level5</h5>
+
+	<h6>Heading Level6</h6>
+</div>
+<div class="section" id="comment">
+	<h2>Form Module</h2>
+	<form class="post" method="post" action="#" id="commentsForm">
+		<fieldset>
+		<legend>Comment Form</legend>
+		<dl>
+
+			<dt>
+				<label for="comment-author">Name</label>
+			</dt>
+			<dd>
+				<input type="text" class="inputField" id="comment-author" name="author" size="30" value="" />
+			</dd>
+			<dt>
+				<label for="comment-email">Mail address</label>
+
+			</dt>
+			<dd>
+				<input type="text" class="inputField" size="30" id="comment-email" name="email" value="" />
+			</dd>
+			<dt>
+				<label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label>
+			</dt>
+			<dd>
+
+				<input type="text" class="inputField" id="comment-url" name="url" size="30" value="http://" />
+			</dd>
+			<dt>Remember Me?</dt>
+			<dd>
+				<input type="radio" class="radio" id="bakecookie" name="bakecookie" value="Forget Info" />
+				<label for="bakecookie">Yes</label>
+				<input type="radio" class="radio" id="forget" name="bakecookie" value="Forget Info" />
+				<label for="forget">No</label>
+
+			</dd>
+			<dt><label for="sex">Select Sex</label></dt>
+			<dd>
+				<select id="sex">
+					<option>male</option>
+					<option>female</option>
+					<option>none</option>
+				</select>
+			</dd>
+			<dt>
+				<label for="comment-text"> Comment <span>スタイル指定用の一部の <abbr title="Hyper Text Markup Language">HTML</abbr>タグが使用できます</span> </label>
+			</dt>
+			<dd>
+				<textarea id="comment-text" name="text" rows="10" cols="60">このページはサンプルであり、書き込みできません。</textarea>
+
+			</dd>
+		</dl>
+		<p>
+			<input type="submit" class="submit" id="comment-preview" name="preview" value="Preview" />
+			<input type="submit" class="submit" id="comment-post" name="post" value="Post" disabled="disabled" />
+		</p>
+		</fieldset>
+	</form>
+</div>
+
+<p>問い合わせがボチボチあるので返答しますが、このページは要素の見栄えを確認するために3ping.org管理人が製作したものですが、使いたい場合は自由に使用して下さって結構です。</p>
+<p class="returnTop"><a href="#DEFAULT" title="このページの先頭へ戻る">Return to Page Top</a></p>
+<address>address <a href="http://3ping.org/">3ping</a>.org wu@gmail.com
+</address>
+</body>
+</html>

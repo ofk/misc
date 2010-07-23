@@ -1,0 +1,436 @@
+/*-----------------------------------------------------------------------------
+ * x.css
+ * Author: ofk
+ * Version: 2010-07-23
+ * TODO: @media printの整備もしておく
+ *-------------------------------------------------------------------------- */
+
+/*
+ *= All reset
+ */
+
+html, body, section, nav, article, aside, h1, h2, h3, h4, h5, h6, hgroup,
+header, footer, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
+figure, figcaption, div, a, em, strong, small, cite, q, dfn, abbr, time, code,
+var, samp, kbd, sub, sup, i, b, mark, ruby, rt, rp, bdo, span, ins, del, img,
+iframe, object, video, audio, canvas, table, caption, colgroup, tbody, thead,
+tfoot, tr, td, th, form, fieldset, legend, label, input, button, select,
+textarea, keygen, output, progress, meter, details, summary, command, menu {
+	margin: 0;
+	/* padding: 0; */
+	/* border: 0 none transparent; */
+	/* display: ?; */
+	/*
+	position: static;
+	top: auto;
+	right: auto;
+	bottom: auto;
+	left: auto;
+	float: none;
+	clear: none;
+	z-index: auto;
+	direction: ltr;
+	unicode-bidi: normal;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	height: auto;
+	min-height: 0;
+	max-height: none;
+	line-height: normal;
+	vertical-align: baseline;
+	overflow: visible;
+	clip: auto;
+	visibility: visible;
+	*/
+	/* content: none; */
+	quotes: none;
+	/*
+	counter-reset: none;
+	counter-increment: none;
+	*/
+	list-style: none none outside;
+	/*
+	page-break-before: auto;
+	page-break-after: auto;
+	page-break-inside: auto;
+	orphans: 2;
+	widows: 2;
+	*/
+	/* color: ?; */
+	/* background: transparent none no-repeat scroll 0 0; */
+	/* font: ?; */
+	/* font-family: ?; */
+	font-style: normal;
+	/* font-variant: normal; */
+	font-weight: normal;
+	font-size: 100%;
+	/* text-indent: 0; */
+	/* text-align: left; */
+	text-decoration: none;
+	/* letter-spacing: normal; */
+	/* word-spacing: normal; */
+	/* text-transform: none; */
+	/* white-space: normal; */
+	caption-side: top;
+	table-layout: auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	/* cursor: auto; */
+	/* outline: ?; */
+}
+
+html, body, section, nav, article, aside, h1, h2, h3, h4, h5, h6, hgroup,
+header, footer, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
+figure, figcaption, div, a, em, strong, small, cite, q, dfn, abbr, time, code,
+var, samp, kbd, sub, sup, i, b, mark, ruby, rt, rp, bdo, span, ins, del, img,
+iframe, object, video, audio, canvas, table, caption, colgroup, tbody, thead,
+tfoot, tr, td, th, form, fieldset, legend, label, /*input, button, select,
+textarea, keygen,*/ output, progress, meter, details, summary, command, menu {
+	padding: 0;
+	border: 0 none transparent;
+	background: transparent none no-repeat scroll 0 0;
+	text-align: left;
+}
+
+p, pre, ol, ul, dl, table, fieldset, menu {
+	margin: 1em 0;
+}
+
+blockquote, figure {
+	margin: 1em;
+}
+
+ol ol, ol ul, ol dl, ol menu,
+ul ol, ul ul, ul dl, ul menu,
+dl ol, dl ul, dl dl, dl menu,
+menu ol, menu ul, menu dl, menu menu{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+ol, ul, menu {
+	margin-left: 2em;
+}
+
+/*
+ *= The root element
+ */
+
+html {
+	color: #333;
+	background: #fff;
+}
+
+/*
+ *= Sections
+ */
+
+body {
+	font:13px/1.231 sans-serif;
+	*font-size: small;
+	*font: x-small;
+}
+
+h1 { font-size: 169.23%; /* 22px */ }
+
+h2 { font-size: 153.85%; /* 20px */ }
+
+h3 { font-size: 138.46%; /* 18px */ }
+
+h4 { font-size: 123.08%; /* 16px */ }
+
+h5 { font-size: 115.38%; /* 15px */ }
+
+h6 { font-size: 107.69%; /* 14px */ }
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 1em 0;
+	font-weight: bold;
+}
+
+section, nav, article, aside, hgroup, header, footer, figure, figcaption {
+	display: block;
+}
+
+/*
+ *= Grouping content
+ */
+
+hr {
+	display: none;
+}
+
+pre {
+	*width:100%;
+	overflow: auto;
+	*overflow-y: hidden;
+	font-family: monospace;
+	white-space: pre;
+}
+
+ol li       { list-style-type: decimal; }
+
+ol ol li    { list-style-type: lower-roman; }
+
+ol ol ol li { list-style-type: lower-greek; }
+
+ul li       { list-style-type: circle; }
+
+ul ul li    { list-style-type: disc; }
+
+ul ul ul li { list-style-type: square; }
+
+dl dd {
+	margin-left: 1em;
+}
+
+figcaption {
+	font-size: 84.62%;
+	text-align: center;
+}
+
+/*
+ *= Text-level semantics
+ */
+
+:link {
+	color: #11c;
+	text-decoration: none;
+}
+
+:visited {
+	color: #529;
+	text-decoration: none;
+}
+
+:link:hover,
+:visited:hover,
+:link:active,
+:visited:active {
+	text-decoration: underline;
+}
+
+q:before {
+	content: open-quote;
+}
+
+q:after {
+	content: close-quote;
+}
+
+code, samp, kbd {
+	font-family: monospace;
+}
+
+sub {
+	vertical-align: sub;
+}
+
+sup {
+	vertical-align: super;
+}
+
+sub, sup {
+	line-height: normal;
+}
+
+small, sub, sup {
+	font-size: smaller;
+}
+
+mark {
+	display: inline;
+	color: #000;
+	background: #ff9;
+}
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted #999;
+	cursor: help;
+}
+
+a abbr[title], a dfn[title] 
+label abbr[title], label dfn[title]  {
+	cursor: inherit;
+}
+
+/*
+em, var, i {
+	font-style: italic;
+}
+*/
+
+strong, dfn, b {
+	font-weight: bold;
+}
+
+/*
+ *= Edits
+ */
+
+del {
+	color: #999;
+	text-decoration: line-through;
+}
+
+ins {
+	border-bottom: 1px dotted #999;
+}
+
+/*
+ *= Embedded content
+ */
+
+img {
+	vertical-align: bottom;
+}
+
+/*
+ *= Tabular data
+ */
+
+table {
+	font-size: inherit;
+	font: 100%;
+}
+
+th {
+	font-weight: bold;
+}
+
+table, td, th {
+	border: 1px solid #999;
+}
+
+/*
+ *= Forms
+ */
+
+legend {
+	color: #333;
+}
+
+input, button, select, textarea {
+	color: #333;
+	font: 99% sans-serif;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	transition:         color linear .2s,
+	                    border linear .2s,
+	                    box-shadow linear .2s;
+	-moz-transition:    color linear .2s,
+	                    border linear .2s,
+	                    -moz-box-shadow linear .2s;
+	-webkit-transition: color linear .2s,
+	                    border linear .2s,
+	                    -webkit-box-shadow linear .2s;
+}
+
+input[type='text'], input[type='password'], select, textarea {
+/* input:not([type='checkbox']):not([type='radio']):not([type='file'])
+        :not([type='submit']):not([type='image']):not([type='reset'])
+        :not([type='button']):focus */
+	border: 1px solid #ccc;
+	padding: 4px 5px;
+}
+
+input[type='text']:focus, input[type='password']:focus, textarea:focus {
+/* input:not([type='checkbox']):not([type='radio']):not([type='file'])
+        :not([type='submit']):not([type='image']):not([type='reset'])
+        :not([type='button']):focus */
+	box-shadow: 0 0 8px rgba(85, 170, 238, .5);
+	-moz-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
+	-webkit-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
+}
+
+input[type='submit'], input[type='button'], button {
+	border: 1px solid;
+	border-color: #ddd #ddd #ccc;
+	padding: 4px 5px;
+	background: #fff;
+	background-image: linear-gradient(top, #fff, #ddd);
+	background-image: -moz-linear-gradient(top, #fff, #ddd);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #ddd));
+	background-repeat: repeat;
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#dddddd');
+}
+
+input[type='text']:focus, input[type='password']:focus, textarea:focus,
+input[type='submit']:hover, input[type='button']:hover, button:hover {
+	outline: none;
+	border-color: #7be;
+	border-color: rgba(85, 170, 238, .75);
+	color: #000;
+}
+
+input[type='submit']:focus, input[type='button']:focus, button:focus,
+input[type='submit']:active, input[type='button']:active, button:active {
+	background: #ddd;
+	outline: none;
+	filter: progid:DXImageTransform.Microsoft.Gradient(enabled=false);
+}
+
+input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
+	border-color: #eee #eee #ddd #eee;
+	background: #eee;
+	color: #888;
+	text-shadow: #fff 0 1px 1px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(enabled=false);
+}
+
+input[type='submit']:disabled:hover, input[type='button']:disabled:hover, button:disabled:hover {
+	border-color: #ccc;
+}
+
+input[type='submit']::-moz-focus-inner, input[type='button']::-moz-focus-inner,
+button::-moz-focus-inner {
+	margin: 0;
+	padding: 0;
+	border: 0 none transparent;
+}
+
+/*
+ *= Interactive elements
+ */
+
+
+/*
+ *= Common classes
+ */
+
+.cfx:after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
+.cfx {
+	*zoom: 1;
+}
+
+.fir {
+	display: inline-block;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-position: left top;
+	text-indent: -9999px;
+	text-align: left;
+}
+
+.flat {
+	outline: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+
+.disable {
+	cursor: default !important;
+}
