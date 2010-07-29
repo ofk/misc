@@ -296,6 +296,7 @@ function $_fn_els(test) {
 	return prev.pushStack(flag ? [] : prev, "els", test);
 }
 
+
 /*----------------------------------------------------------
  * $.fn.addRule
  * $.fn.removeRule
@@ -641,12 +642,12 @@ function $_url_hash(val, skip) {
 				(function rec() {
 					if (!$_url_hash.skip_ && $_url_hash.hash_ !== location_.hash) {
 						$_url_hash.hash_ = location_.hash;
-						$(window_).on("changeAnchor", $_url_hash());
+						$(window_).trigger("changeAnchor", [$_url_hash()]);
 					}
 					$_url_hash.tid_ = setTimeout(rec, 300);
 				})();
 			}
-			return $(window_).on("changeAnchor", val);
+			return $(window_).bind("changeAnchor", val);
 		// setter
 		default:
 			if (skip) {
