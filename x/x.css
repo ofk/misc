@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------
  * x.css
  * Author: ofk
- * Version: 2010-07-23
+ * Version: 2010-08-03
  * TODO: @media printの整備もしておく
  *-------------------------------------------------------------------------- */
 
@@ -61,13 +61,13 @@ textarea, keygen, output, progress, meter, details, summary, command, menu {
 	/* background: transparent none no-repeat scroll 0 0; */
 	/* font: ?; */
 	/* font-family: ?; */
-	font-style: normal;
+	font-style: inherit /* normal */;
 	/* font-variant: normal; */
-	font-weight: normal;
+	font-weight: inherit /* normal */;
 	font-size: 100%;
 	/* text-indent: 0; */
 	/* text-align: left; */
-	text-decoration: none;
+	text-decoration: inherit /* none */;
 	/* letter-spacing: normal; */
 	/* word-spacing: normal; */
 	/* text-transform: none; */
@@ -91,7 +91,7 @@ textarea, keygen,*/ output, progress, meter, details, summary, command, menu {
 	padding: 0;
 	border: 0 none transparent;
 	background: transparent none no-repeat scroll 0 0;
-	text-align: left;
+	text-align: inherit /* left */;
 }
 
 p, pre, ol, ul, dl, table, fieldset, menu {
@@ -292,12 +292,15 @@ img {
  */
 
 table {
-	font-size: inherit;
 	font: 100%;
 }
 
 th {
 	font-weight: bold;
+}
+
+caption {
+	text-align: center;
 }
 
 table, td, th {
@@ -427,7 +430,6 @@ button::-moz-focus-inner {
 .flat {
 	outline: none;
 	-moz-user-select: none;
-	-khtml-user-select: none;
 	-webkit-user-select: none;
 }
 
