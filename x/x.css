@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------
  * x.css
  * Author: ofk
- * Version: 2010-08-03
+ * Version: 2010-08-05
  * TODO: @media printの整備もしておく
  *-------------------------------------------------------------------------- */
 
@@ -94,26 +94,6 @@ textarea, keygen,*/ output, progress, meter, details, summary, command, menu {
 	text-align: inherit /* left */;
 }
 
-p, pre, ol, ul, dl, table, fieldset, menu {
-	margin: 1em 0;
-}
-
-blockquote, figure {
-	margin: 1em;
-}
-
-ol ol, ol ul, ol dl, ol menu,
-ul ol, ul ul, ul dl, ul menu,
-dl ol, dl ul, dl dl, dl menu,
-menu ol, menu ul, menu dl, menu menu{
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-ol, ul, menu {
-	margin-left: 2em;
-}
-
 /*
  *= The root element
  */
@@ -146,7 +126,6 @@ h5 { font-size: 115.38%; /* 15px */ }
 h6 { font-size: 107.69%; /* 14px */ }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 1em 0;
 	font-weight: bold;
 }
 
@@ -181,10 +160,6 @@ ul li       { list-style-type: circle; }
 ul ul li    { list-style-type: disc; }
 
 ul ul ul li { list-style-type: square; }
-
-dl dd {
-	margin-left: 1em;
-}
 
 figcaption {
 	font-size: 84.62%;
@@ -402,6 +377,35 @@ button::-moz-focus-inner {
 /*
  *= Interactive elements
  */
+
+
+/*
+ *= Margin Setting
+ */
+
+h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset, menu {
+	margin: 1em 0;
+}
+
+blockquote, figure {
+	margin: 1em;
+}
+
+ol ol, ol ul, ol dl, ol menu,
+ul ol, ul ul, ul dl, ul menu,
+dl ol, dl ul, dl dl, dl menu,
+menu ol, menu ul, menu dl, menu menu{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+ol, ul, menu {
+	margin-left: 2em;
+}
+
+dl dd {
+	margin-left: 1em;
+}
 
 
 /*
