@@ -25,6 +25,7 @@ TYPE_ = {
 },
 TYPE_DETECTOR_ = Object.prototype.toString,
 TO_ARRAY = Array.prototype.slice,
+log_ = "",
 sheet_;
 
 
@@ -56,10 +57,10 @@ $.type = $_type;
 function $_type(obj) {
 	var tmp;
 	return TYPE_[tmp = typeof obj] || (tmp = TYPE_[TYPE_DETECTOR_.call(obj)]) ? tmp :
-	       !obj            ? "null" :
-	       obj.setTimeout  ? "window" :
-	       obj.nodeType    ? "node" :
-	       "length" in obj ? "array" : "object";
+	       !obj                                          ? "null" :
+	       obj.setTimeout                                ? "window" :
+	       obj.nodeType                                  ? "node" :
+	       "length" in obj && (!obj.length || 0 in obj) ? "array" : "object";
 }
 
 
@@ -122,8 +123,6 @@ $.log = $_log;
 $.showLog = $_showLog;
 $.clearLog = $_clearLog;
 
-var _log = "";
-
 function $_log() {
 	var elem = document.getElementById("$_log");
 	if (!elem && document.body) {
@@ -158,13 +157,13 @@ function $_log() {
 		}
 		R = R.join("\n");
 		var t, D = new Date;
-		_log = ((t = D.getHours())   > 9 ? "" : "0") + t + ":"
+		log_ = ((t = D.getHours())   > 9 ? "" : "0") + t + ":"
 		     + ((t = D.getMinutes()) > 9 ? "" : "0") + t + ":"
 		     + ((t = D.getSeconds()) > 9 ? "" : "0") + t + ">"
-		     + (R.indexOf("\n") > -1 ? "\n" : " ") + R + "\n" + _log;
+		     + (R.indexOf("\n") > -1 ? "\n" : " ") + R + "\n" + log_;
 	}
 
-	elem && $("textarea", elem).val(_log);
+	elem && $("textarea", elem).val(log_);
 }
 
 function $_showLog() {
@@ -182,9 +181,9 @@ function $_clearLog() {
  * クラスの生成。
  *--------------------------------------------------------*/
 
-$.klass = $_klass;
+$.klass = $_klass_simple;
 
-//*
+/*
 function $_klass(parent, methods) {
 	if (typeof parent === "object") {
 		methods = parent;
@@ -246,7 +245,7 @@ function $_klass(parent, methods) {
 }
 
 /*/
-function $_klass(parent, methods) {
+function $_klass_simple(parent, methods) {
 	if (typeof parent === "object") {
 		methods = parent;
 		parent = null;
@@ -267,6 +266,7 @@ function $_klass(parent, methods) {
 	return klass;
 }
 //*/
+
 
 /*----------------------------------------------------------
  * $.fn.iff
