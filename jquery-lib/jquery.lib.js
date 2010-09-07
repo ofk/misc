@@ -37,6 +37,7 @@ sheet_;
 $.mix = $_mix;
 
 function $_mix(src) {
+	// 先頭の要素に後続の要素を追加していく
 	for (var i = 1, iz = arguments.length; i < iz; ++i) {
 		var dst = arguments[i];
 		for (var j in dst) {
@@ -57,9 +58,9 @@ $.type = $_type;
 function $_type(obj) {
 	var tmp;
 	return TYPE_[tmp = typeof obj] || (tmp = TYPE_[TYPE_DETECTOR_.call(obj)]) ? tmp :
-	       !obj                                          ? "null" :
-	       obj.setTimeout                                ? "window" :
-	       obj.nodeType                                  ? "node" :
+	       !obj                                         ? "null" :
+	       obj.setTimeout                               ? "window" :
+	       obj.nodeType                                 ? "node" :
 	       "length" in obj && (!obj.length || 0 in obj) ? "array" : "object";
 }
 
@@ -120,13 +121,15 @@ function $_dump(obj, indent) {
  *--------------------------------------------------------*/
 
 $.log = $_log;
-$.showLog = $_showLog;
+$_log.debug = false;
 $.clearLog = $_clearLog;
 
 function $_log() {
-	var elem = document.getElementById("$_log");
-	if (!elem && document.body) {
-		elem = document.createElement("div");
+	// 要素の生成
+	var elem = document_.getElementById("$_log"),
+	    body = document_.body;
+	if (!elem && body) {
+		elem = document_.createElement("div");
 		elem.id = "$_log";
 		$(elem).css({
 			padding: "20px",
@@ -142,37 +145,40 @@ function $_log() {
 			width: "100%",
 			height: "100%"
 		}));
-		document.body.appendChild(elem);
-		$(document).keydown(function (evt) {
-			evt.keyCode === 46 && $(elem).toggle(500);
+		body.appendChild(elem);
+		$(document_).keydown(function (evt) {
+			if ($_log.debug && evt.keyCode === 46) {
+				$(elem).toggle(500);
+				return false;
+			}
 		});
 	}
-	var A = Array.prototype.slice.call(arguments),
-	    R = [];
 
-	if (A.length > 0) {
-		for (var i = 0, iz = A.length; i < iz; ++i) {
-			var o = A[i], t = $.type(o);
-			R[i] = t === "string" || t === "number" ? o : "(" + t + ") " + $.dump(o);
+	var arr = TO_ARRAY.call(arguments),
+	    res = [];
+
+	if (arr.length > 0) {
+		for (var i = 0, iz = arr.length; i < iz; ++i) {
+			var o = arr[i], t = $.type(o);
+			res[i] = t === "string" || t === "number" ? o : "(" + t + ") " + $.dump(o);
 		}
-		R = R.join("\n");
-		var t, D = new Date;
-		log_ = ((t = D.getHours())   > 9 ? "" : "0") + t + ":"
-		     + ((t = D.getMinutes()) > 9 ? "" : "0") + t + ":"
-		     + ((t = D.getSeconds()) > 9 ? "" : "0") + t + ">"
-		     + (R.indexOf("\n") > -1 ? "\n" : " ") + R + "\n" + log_;
+		res = res.join("\n");
+		var t, d = new Date;
+		log_ = ((t = d.getHours())   > 9 ? "" : "0") + t + ":"
+		     + ((t = d.getMinutes()) > 9 ? "" : "0") + t + ":"
+		     + ((t = d.getSeconds()) > 9 ? "" : "0") + t + ">"
+		     + (res.indexOf("\n") > -1 ? "\n" : " ") + res + "\n" + log_;
+
 	}
 
 	elem && $("textarea", elem).val(log_);
-}
 
-function $_showLog() {
-	$(document.getElementById("$_log")).show(500);
+	return $_log;
 }
 
 function $_clearLog() {
-	var elem = document.getElementById("$_log");
-	elem && $("textarea", elem).val("");
+	log_ = "";
+	return $_log();
 }
 
 
@@ -183,77 +189,18 @@ function $_clearLog() {
 
 $.klass = $_klass_simple;
 
-/*
-function $_klass(parent, methods) {
-	if (typeof parent === "object") {
-		methods = parent;
-		parent = null;
-	}
-
-	function klass() {
-		this.klass = klass;
-		if (klass.parent) {
-			this.parent = makeParent(this, klass.parent);
-		}
-		this.init && this.init.apply(this, arguments);
-	}
-	klass.parent = parent;
-
-	var kp = klass.fn = klass.prototype;
-
-	if (parent) {
-		var pp = parent.prototype;
-		for (var i in pp) {
-			var f = kp[i] = pp[i];
-			if ($_type(f) === "function" && f.override) {
-				kp[i] = (function (name) {
-					return function f() {
-						return this.parent(name, arguments);
-					};
-				})(i)
-			}
-		}
-	}
-
-	if (methods) for (var i in methods) {
-		var t = kp[i], f = kp[i] = methods[i];
-		if ($_type(f) === "function" && $_type(t) === "function") {
-			f.override = true;
-		}
-	}
-
-	return klass;
-
-	function makeParent(self, parent) {
-		var pp = parent.prototype, sp, tp;
-		if (tp = parent.parent) sp = makeParent(self, tp);
-		var fn = function (name, args) {
-			var bk = self.parent;
-			self.parent = sp;
-			var rv = pp[name].apply(self, args || []);
-			self.parent = bk;
-			return rv;
-		};
-		fn.parent = sp;
-		for (var i in pp) if ($_type(pp[i]) === "function") {
-			fn[i] = (function (name) {
-				return function () { return fn(name, arguments); }; // fn = self.parent
-			})(i);
-		}
-		return fn;
-	}
-}
-
-/*/
 function $_klass_simple(parent, methods) {
 	if (typeof parent === "object") {
 		methods = parent;
 		parent = null;
 	}
+
 	function klass() {
-		this.klass = klass;
 		this.init && this.init.apply(this, arguments);
 	}
+
+	klass.prototype.klass = klass;
+
 	if (parent) {
 		function tmp() {}
 		tmp.prototype = parent.prototype;
@@ -262,10 +209,11 @@ function $_klass_simple(parent, methods) {
 		klass.prototype.parent.constructor = parent;
 		klass.prototype.constructor = klass;
 	}
+
 	methods && $.extend(klass.prototype, methods);
+
 	return klass;
 }
-//*/
 
 
 /*----------------------------------------------------------

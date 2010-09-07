@@ -108,5 +108,111 @@ utest("$.type", [
 	}
 ]);
 
+utest("$.klass", [
+	function () {
+		var f = $.klass({ init: function (a) { this.a = a; }, get: function () { return this.a; } }),
+		    o = new f(123);
+		return [
+			[ o.klass, "===", f ],
+			[ o.a, "===", 123 ],
+			[ o.get(), "===", 123 ]
+		];
+	}
+]);
+
+utest("$.fn.iff & $.fn.els", [
+	function () {
+		var res_iff = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(true).each(function () { res_iff += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 6 ],
+			[ res, "===", 6 ]
+		];
+	},
+	function () {
+		var res_iff = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(false).each(function () { res_iff += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 0 ],
+			[ res, "===", 6 ]
+		];
+	},
+	function () {
+		var res_iff = 0,
+		    res_els = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(true).each(function () { res_iff += this; })
+			.els().each(function () { res_els += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 6 ],
+			[ res_els, "===", 0 ],
+			[ res, "===", 6 ]
+		];
+	},
+	function () {
+		var res_iff = 0,
+		    res_els = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(false).each(function () { res_iff += this; })
+			.els().each(function () { res_els += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 0 ],
+			[ res_els, "===", 6 ],
+			[ res, "===", 6 ]
+		];
+	},
+	function () {
+		var res_iff = 0,
+		    res_els = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(false).each(function () { res_iff += this; })
+			.els(true).each(function () { res_els += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 0 ],
+			[ res_els, "===", 6 ],
+			[ res, "===", 6 ]
+		];
+	},
+	function () {
+		var res_iff = 0,
+		    res_els = 0,
+		    res = 0;
+		$([1, 2, 3])
+			.iff(false).each(function () { res_iff += this; })
+			.els(false).each(function () { res_els += this; })
+			.end().each(function () { res += this; });
+		return [
+			[ res_iff, "===", 0 ],
+			[ res_els, "===", 0 ],
+			[ res, "===", 6 ]
+		];
+	}
+]);
+
+var tmp;
+utest("$.fn.addRule & $.fn.removeRule", [
+	function () {
+		tmp = $("body").addRule("border", "123px solid");
+		return [[ tmp.css("border-top-width"), "===", "123px" ]];
+	},
+	function () {
+		tmp.removeRule();
+		return [[ tmp.css("border-top-width"), "!==", "123px" ]];
+	}
+]);
+tmp = null;
+
 </script>
 </html>

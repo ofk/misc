@@ -8,7 +8,7 @@
 <body></body>
 <script type="text/javascript" src="utest.js"></script>
 <script type="text/javascript">
-utest("test", {
+utest("named test", {
   right1: function () {
     return true;
   },
@@ -30,5 +30,27 @@ utest("test", {
     throw new Error("msg");
   }
 });
+utest("auto named test", [
+  function () {
+    return true;
+  },
+  function () {
+    return [ [true], [1, 1], [1, "==", "1"] ];
+  },
+  "right", function (test) {
+    setTimeout(function () { test(true); }, 1000);
+  },
+  "right", function (test) {
+    setTimeout(function () { test([ [true], [1, 1], [1, "==", "1"] ]); }, 1000);
+  },
+  function () {
+  },
+  function () {
+    return false;
+  },
+  "error", function () {
+    throw new Error("msg");
+  }
+]);
 </script>
 </html>
