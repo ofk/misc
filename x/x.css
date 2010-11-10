@@ -1,21 +1,30 @@
 /*-----------------------------------------------------------------------------
  * x.css
  * Author: ofk
- * Version: 2010-08-05
- * TODO: @media printの整備もしておく
+ * Version: 2010-11-10
  *-------------------------------------------------------------------------- */
 
 /*
  *= All reset
  */
 
-html, body, section, nav, article, aside, h1, h2, h3, h4, h5, h6, hgroup,
-header, footer, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
-figure, figcaption, div, a, em, strong, small, cite, q, dfn, abbr, time, code,
-var, samp, kbd, sub, sup, i, b, mark, ruby, rt, rp, bdo, span, ins, del, img,
-iframe, object, video, audio, canvas, table, caption, colgroup, tbody, thead,
-tfoot, tr, td, th, form, fieldset, legend, label, input, button, select,
-textarea, keygen, output, progress, meter, details, summary, command, menu {
+html, body,
+/* remove HTML5: section, nav, article, aside, */
+h1, h2, h3, h4, h5, h6,
+/* remove HTML5: hgroup, header, footer, */
+address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
+/* remove HTML5: figure, figcaption, */
+div, a, em, strong, small, cite, q, dfn, abbr,
+/* remove HTML5: time, */
+code, var, samp, kbd, sub, sup, i, b,
+/* remove HTML5: mark, */
+/* remove ruby and bdo: ruby, rt, rp, bdo, */
+span, ins, del, img, iframe, object,
+/* remove HTML5: video, audio, canvas, */
+table, caption, colgroup, tbody, thead, tfoot, tr, td, th,
+form, fieldset, legend, label, input, button, select, textarea
+/* remove HTML5: keygen, output, progress, meter, details, summary, command,
+menu */ {
 	margin: 0;
 	/* padding: 0; */
 	/* border: 0 none transparent; */
@@ -81,13 +90,25 @@ textarea, keygen, output, progress, meter, details, summary, command, menu {
 	/* outline: ?; */
 }
 
-html, body, section, nav, article, aside, h1, h2, h3, h4, h5, h6, hgroup,
-header, footer, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
-figure, figcaption, div, a, em, strong, small, cite, q, dfn, abbr, time, code,
-var, samp, kbd, sub, sup, i, b, mark, ruby, rt, rp, bdo, span, ins, del, img,
-iframe, object, video, audio, canvas, table, caption, colgroup, tbody, thead,
-tfoot, tr, td, th, form, fieldset, legend, label, /*input, button, select,
-textarea, keygen,*/ output, progress, meter, details, summary, command, menu {
+
+html, body,
+/* remove HTML5: section, nav, article, aside, */
+h1, h2, h3, h4, h5, h6,
+/* remove HTML5: hgroup, header, footer, */
+address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
+/* remove HTML5: figure, figcaption, */
+div, a, em, strong, small, cite, q, dfn, abbr,
+/* remove HTML5: time, */
+code, var, samp, kbd, sub, sup, i, b,
+/* remove HTML5: mark, */
+/* remove ruby and bdo: ruby, rt, rp, bdo, */
+span, ins, del, img, iframe, object,
+/* remove HTML5: video, audio, canvas, */
+table, caption, colgroup, tbody, thead, tfoot, tr, td, th,
+form, fieldset, legend, label,
+/* remove form element: input, button, select, textarea, keygen */
+/* remove HTML5: keygen, output, progress, meter, details, summary, command,
+menu */ {
 	padding: 0;
 	border: 0 none transparent;
 	background: transparent none no-repeat scroll 0 0;
@@ -98,17 +119,21 @@ textarea, keygen,*/ output, progress, meter, details, summary, command, menu {
  *= The root element
  */
 
+/*
 html {
 	color: #333;
 	background: #fff;
 }
+*/
 
 /*
  *= Sections
  */
 
 body {
-	font:13px/1.231 sans-serif;
+	color: #333;
+	background: #fff;
+	font: 13px/1.231 sans-serif;
 	*font-size: small;
 	*font: x-small;
 }
@@ -129,9 +154,12 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 }
 
+/*
+remove HTML5:
 section, nav, article, aside, hgroup, header, footer, figure, figcaption {
 	display: block;
 }
+*/
 
 /*
  *= Grouping content
@@ -142,11 +170,16 @@ hr {
 }
 
 pre {
-	*width:100%;
+	*width: 100%;
 	overflow: auto;
 	*overflow-y: hidden;
 	font-family: monospace;
-	white-space: pre;
+	white-space: -moz-pre-wrap; /* Fx */
+	white-space: -o-pre-wrap;   /* O7 */
+	white-space: -pre-wrap;     /* O4-6 */
+	white-space: pre-wrap;      /* CSS3 */
+	word-wrap: break-word;      /* IE5.5+ */
+	word-break: break-all;      /* IE5+ */
 }
 
 ol li       { list-style-type: decimal; }
@@ -161,23 +194,31 @@ ul ul li    { list-style-type: disc; }
 
 ul ul ul li { list-style-type: square; }
 
+/*
+remove HTML5:
 figcaption {
 	font-size: 84.62%;
 	text-align: center;
 }
+*/
 
 /*
  *= Text-level semantics
  */
 
 :link {
-	color: #11c;
+	color: #2200c1; /* Google Color */
 	text-decoration: none;
 }
 
 :visited {
-	color: #529;
+	color: #551a8b; /* Google Color */
 	text-decoration: none;
+}
+
+:link:active,
+:visited:active {
+	color: #c11; /* Google Color */
 }
 
 :link:hover,
@@ -215,18 +256,21 @@ small, sub, sup {
 	font-size: smaller;
 }
 
+/*
+remove HTML5:
 mark {
 	display: inline;
 	color: #000;
 	background: #ff9;
 }
+*/
 
 abbr[title], dfn[title] {
 	border-bottom: 1px dotted #999;
 	cursor: help;
 }
 
-a abbr[title], a dfn[title] 
+a abbr[title], a dfn[title],
 label abbr[title], label dfn[title]  {
 	cursor: inherit;
 }
@@ -246,7 +290,7 @@ strong, dfn, b {
  */
 
 del {
-	color: #999;
+	color: #666;
 	text-decoration: line-through;
 }
 
@@ -293,14 +337,20 @@ legend {
 input, button, select, textarea {
 	color: #333;
 	font: 99% sans-serif;
+	/* IE9+, Fx(4), Cr, Sf(5), O10.5+ */
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	/* IE8+, Fx(x), Cr(x), Sf(x), O */
 	box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	/* Fx4+(x), Cr(x), Sf(x), O10.5+(x) */
 	transition:         color linear .2s,
+	                    border linear .2s,
+	                    box-shadow linear .2s;
+	-o-transition:      color linear .2s,
 	                    border linear .2s,
 	                    box-shadow linear .2s;
 	-moz-transition:    color linear .2s,
@@ -311,18 +361,21 @@ input, button, select, textarea {
 	                    -webkit-box-shadow linear .2s;
 }
 
-input[type='text'], input[type='password'], select, textarea {
+input[type='text'], input[type='password'],
 /* input:not([type='checkbox']):not([type='radio']):not([type='file'])
         :not([type='submit']):not([type='image']):not([type='reset'])
         :not([type='button']):focus */
+select, textarea {
 	border: 1px solid #ccc;
 	padding: 4px 5px;
 }
 
-input[type='text']:focus, input[type='password']:focus, textarea:focus {
+input[type='text']:focus, input[type='password']:focus,
 /* input:not([type='checkbox']):not([type='radio']):not([type='file'])
         :not([type='submit']):not([type='image']):not([type='reset'])
         :not([type='button']):focus */
+textarea:focus {
+	/* IE9+, Fx3.5+(4), Cr(x), Sf(x), O10.5+ */
 	box-shadow: 0 0 8px rgba(85, 170, 238, .5);
 	-moz-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
 	-webkit-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
@@ -333,9 +386,11 @@ input[type='submit'], input[type='button'], button {
 	border-color: #ddd #ddd #ccc;
 	padding: 4px 5px;
 	background: #fff;
-	background-image: linear-gradient(top, #fff, #ddd);
+	/* Fx3.6+(x), Cr(x), Sf 4+(x), O11.0+(x) */
 	background-image: -moz-linear-gradient(top, #fff, #ddd);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #ddd));
+	background-image: -o-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #ddd));
+	background-image: linear-gradient(top, #fff, #ddd);
 	background-repeat: repeat;
 	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#dddddd');
 }
@@ -344,6 +399,7 @@ input[type='text']:focus, input[type='password']:focus, textarea:focus,
 input[type='submit']:hover, input[type='button']:hover, button:hover {
 	outline: none;
 	border-color: #7be;
+	/* IE9+, Fx, Cr, Sf, O */
 	border-color: rgba(85, 170, 238, .75);
 	color: #000;
 }
@@ -369,7 +425,6 @@ input[type='submit']:disabled:hover, input[type='button']:disabled:hover, button
 
 input[type='submit']::-moz-focus-inner, input[type='button']::-moz-focus-inner,
 button::-moz-focus-inner {
-	margin: 0;
 	padding: 0;
 	border: 0 none transparent;
 }
@@ -383,7 +438,8 @@ button::-moz-focus-inner {
  *= Margin Setting
  */
 
-h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset, menu {
+/* remove HTML5: */
+h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset /* menu */ {
 	margin: 1em 0;
 }
 
@@ -391,15 +447,15 @@ blockquote, figure {
 	margin: 1em;
 }
 
-ol ol, ol ul, ol dl, ol menu,
-ul ol, ul ul, ul dl, ul menu,
-dl ol, dl ul, dl dl, dl menu,
-menu ol, menu ul, menu dl, menu menu{
+ol ol, ol ul, ol dl, /* ol menu, */
+ul ol, ul ul, ul dl, /* ul menu, */
+dl ol, dl ul, dl dl  /* dl menu, */
+/* menu ol, menu ul, menu dl, menu menu */ {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-ol, ul, menu {
+ol, ul /* menu */ {
 	margin-left: 2em;
 }
 
@@ -439,4 +495,80 @@ dl dd {
 
 .disable {
 	cursor: default !important;
+}
+
+/*
+ *= Screen Styles
+ */
+/*
+@media screen {
+
+	[accesskey]::after {
+		content: '\20\5B' attr(accesskey) '\5D\20';
+		color: #666;
+		font-size: smaller;
+		text-transform: uppercase;
+	}
+
+	del[datetime]::after, ins[datetime]::after {
+		content: '\20\28' attr(datetime) '\29\20';
+		color: #666;
+		font-size: smaller;
+	}
+
+}
+*/
+
+
+/*
+ *= Print styles
+ */
+
+@media print {
+
+	@page {
+		margin: 10%;
+	}
+
+	[title]::after {
+		content: '\20\28' attr(title) '\29\20';
+	}
+
+	[href^='http://']:after, [href^='https://']:after,
+	[href^='ftp://']:after, [href^='ftps://']:after
+	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after*/
+	{
+		content: '\20\3C' attr(href) '\3E\20';
+		color: #666;
+		font-size: smaller;
+	}
+
+	[href^='//']:after {
+		content: '\20\3C\68\74\74\70\3A' attr(href) '\3E\20';
+		color: #666;
+		font-size: smaller;
+	}
+
+	blockquote, pre {
+		page-break-inside: avoid;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		page-break-after: avoid;
+		page-break-inside: avoid;
+	}
+
+	:link, :visited {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+
+	dl, ol, ul {
+		page-break-before: avoid;
+	}
+
+	del {
+		display: none;
+	}
+
 }
