@@ -1,29 +1,29 @@
 /*-----------------------------------------------------------------------------
  * x.css
  * Author: ofk
- * Version: 2010-11-10
+ * Version: 2010-11-27
  *-------------------------------------------------------------------------- */
 
 /*
  *= All reset
  */
 
-html, body,
-/* remove HTML5: section, nav, article, aside, */
-h1, h2, h3, h4, h5, h6,
-/* remove HTML5: hgroup, header, footer, */
-address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
-/* remove HTML5: figure, figcaption, */
-div, a, em, strong, small, cite, q, dfn, abbr,
-/* remove HTML5: time, */
-code, var, samp, kbd, sub, sup, i, b,
-/* remove HTML5: mark, */
-/* remove ruby and bdo: ruby, rt, rp, bdo, */
-span, ins, del, img, iframe, object,
-/* remove HTML5: video, audio, canvas, */
-table, caption, colgroup, tbody, thead, tfoot, tr, td, th,
-form, fieldset, legend, label, input, button, select, textarea
-/* remove HTML5: keygen, output, progress, meter, details, summary, command,
+  html, body
+/* remove HTML5: , section, nav, article, aside */
+, h1, h2, h3, h4, h5, h6
+/* remove HTML5: , hgroup, header, footer */
+, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
+/* remove HTML5: , figure, figcaption */
+, div, a, em, strong, small, cite, q, dfn, abbr
+/* remove HTML5: , time */
+, code, var, samp, kbd, sub, sup, i, b
+/* remove HTML5: , mark */
+/* remove ruby and bdo: , ruby, rt, rp, bdo */
+, span, ins, del, img, iframe, object
+/* remove HTML5: , video, audio, canvas */
+, table, caption, colgroup, tbody, thead, tfoot, tr, td, th
+, form, fieldset, legend, label, input, button, select, textarea
+/* remove HTML5: , keygen, output, progress, meter, details, summary, command,
 menu */ {
 	margin: 0;
 	/* padding: 0; */
@@ -90,24 +90,23 @@ menu */ {
 	/* outline: ?; */
 }
 
-
-html, body,
-/* remove HTML5: section, nav, article, aside, */
-h1, h2, h3, h4, h5, h6,
-/* remove HTML5: hgroup, header, footer, */
-address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
-/* remove HTML5: figure, figcaption, */
-div, a, em, strong, small, cite, q, dfn, abbr,
-/* remove HTML5: time, */
-code, var, samp, kbd, sub, sup, i, b,
-/* remove HTML5: mark, */
-/* remove ruby and bdo: ruby, rt, rp, bdo, */
-span, ins, del, img, iframe, object,
-/* remove HTML5: video, audio, canvas, */
-table, caption, colgroup, tbody, thead, tfoot, tr, td, th,
-form, fieldset, legend, label,
-/* remove form element: input, button, select, textarea, keygen */
-/* remove HTML5: keygen, output, progress, meter, details, summary, command,
+  html, body
+/* remove HTML5: , section, nav, article, aside */
+, h1, h2, h3, h4, h5, h6
+/* remove HTML5: , hgroup, header, footer */
+, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
+/* remove HTML5: , figure, figcaption */
+, div, a, em, strong, small, cite, q, dfn, abbr
+/* remove HTML5: , time */
+, code, var, samp, kbd, sub, sup, i, b
+/* remove HTML5: , mark */
+/* remove ruby and bdo: , ruby, rt, rp, bdo */
+, span, ins, del, img, iframe, object
+/* remove HTML5: , video, audio, canvas */
+, table, caption, colgroup, tbody, thead, tfoot, tr, td, th
+, form, fieldset, legend, label
+/* remove form element: , input, button, select, textarea, keygen */
+/* remove HTML5: , keygen, output, progress, meter, details, summary, command,
 menu */ {
 	padding: 0;
 	border: 0 none transparent;
@@ -216,15 +215,11 @@ figcaption {
 	text-decoration: none;
 }
 
-:link:active,
-:visited:active {
+:link:active, :visited:active {
 	color: #c11; /* Google Color */
 }
 
-:link:hover,
-:visited:hover,
-:link:active,
-:visited:active {
+:link:hover, :visited:hover, :link:active, :visited:active {
 	text-decoration: underline;
 }
 
@@ -270,8 +265,7 @@ abbr[title], dfn[title] {
 	cursor: help;
 }
 
-a abbr[title], a dfn[title],
-label abbr[title], label dfn[title]  {
+a abbr[title], a dfn[title], label abbr[title], label dfn[title]  {
 	cursor: inherit;
 }
 
@@ -361,20 +355,20 @@ input, button, select, textarea {
 	                    -webkit-box-shadow linear .2s;
 }
 
-input[type='text'], input[type='password'],
+  input[type='text'], input[type='password']
 /* input:not([type='checkbox']):not([type='radio']):not([type='file'])
         :not([type='submit']):not([type='image']):not([type='reset'])
         :not([type='button']):focus */
-select, textarea {
+, select, textarea {
 	border: 1px solid #ccc;
 	padding: 4px 5px;
 }
 
-input[type='text']:focus, input[type='password']:focus,
+  input[type='text']:focus, input[type='password']:focus
 /* input:not([type='checkbox']):not([type='radio']):not([type='file'])
         :not([type='submit']):not([type='image']):not([type='reset'])
         :not([type='button']):focus */
-textarea:focus {
+, select:focus, textarea:focus {
 	/* IE9+, Fx3.5+(4), Cr(x), Sf(x), O10.5+ */
 	box-shadow: 0 0 8px rgba(85, 170, 238, .5);
 	-moz-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
@@ -392,20 +386,21 @@ input[type='submit'], input[type='button'], button {
 	background-image: -o-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #ddd));
 	background-image: linear-gradient(top, #fff, #ddd);
 	background-repeat: repeat;
-	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#dddddd');
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#dddddd'); /* error: #fff, #ddd */
 }
 
-input[type='text']:focus, input[type='password']:focus, textarea:focus,
-input[type='submit']:hover, input[type='button']:hover, button:hover {
+  input[type='text']:focus, input[type='password']:focus, textarea:focus
+, select:focus, input[type='submit']:hover, input[type='button']:hover
+, button:hover {
 	outline: none;
 	border-color: #7be;
 	/* IE9+, Fx, Cr, Sf, O */
-	border-color: rgba(85, 170, 238, .75);
+	/* border-color: rgba(85, 170, 238, .75); */
 	color: #000;
 }
 
-input[type='submit']:focus, input[type='button']:focus, button:focus,
-input[type='submit']:active, input[type='button']:active, button:active {
+  input[type='submit']:focus, input[type='button']:focus, button:focus
+, input[type='submit']:active, input[type='button']:active, button:active {
 	background: #ddd;
 	outline: none;
 	filter: progid:DXImageTransform.Microsoft.Gradient(enabled=false);
@@ -419,12 +414,14 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 	filter: progid:DXImageTransform.Microsoft.Gradient(enabled=false);
 }
 
-input[type='submit']:disabled:hover, input[type='button']:disabled:hover, button:disabled:hover {
+  input[type='submit']:disabled:hover, input[type='button']:disabled:hover
+, button:disabled:hover {
 	border-color: #ccc;
 }
 
-input[type='submit']::-moz-focus-inner, input[type='button']::-moz-focus-inner,
-button::-moz-focus-inner {
+  input[type='submit']::-moz-focus-inner
+, input[type='button']::-moz-focus-inner
+, button::-moz-focus-inner {
 	padding: 0;
 	border: 0 none transparent;
 }
@@ -439,7 +436,7 @@ button::-moz-focus-inner {
  */
 
 /* remove HTML5: */
-h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset /* menu */ {
+h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset /* , menu */ {
 	margin: 1em 0;
 }
 
@@ -447,15 +444,15 @@ blockquote, figure {
 	margin: 1em;
 }
 
-ol ol, ol ul, ol dl, /* ol menu, */
-ul ol, ul ul, ul dl, /* ul menu, */
-dl ol, dl ul, dl dl  /* dl menu, */
-/* menu ol, menu ul, menu dl, menu menu */ {
+  ol ol, ol ul, ol dl /* , ol menu */
+, ul ol, ul ul, ul dl /* , ul menu */
+, dl ol, dl ul, dl dl /* , dl menu */
+/* , menu ol, menu ul, menu dl, menu menu */ {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-ol, ul /* menu */ {
+ol, ul /* , menu */ {
 	margin-left: 2em;
 }
 
@@ -468,6 +465,7 @@ dl dd {
  *= Common classes
  */
 
+/*
 .cfx:after {
 	display: block;
 	clear: both;
@@ -496,21 +494,23 @@ dl dd {
 .disable {
 	cursor: default !important;
 }
+*/
 
 /*
  *= Screen Styles
  */
+
 /*
 @media screen {
 
-	[accesskey]::after {
+	[accesskey]:after {
 		content: '\20\5B' attr(accesskey) '\5D\20';
 		color: #666;
 		font-size: smaller;
 		text-transform: uppercase;
 	}
 
-	del[datetime]::after, ins[datetime]::after {
+	del[datetime]:after, ins[datetime]:after {
 		content: '\20\28' attr(datetime) '\29\20';
 		color: #666;
 		font-size: smaller;
@@ -530,13 +530,13 @@ dl dd {
 		margin: 10%;
 	}
 
-	[title]::after {
+	[title]:after {
 		content: '\20\28' attr(title) '\29\20';
 	}
 
-	[href^='http://']:after, [href^='https://']:after,
-	[href^='ftp://']:after, [href^='ftps://']:after
-	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after*/
+	  [href^='http://']:after, [href^='https://']:after
+	, [href^='ftp://']:after, [href^='ftps://']:after
+	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after */
 	{
 		content: '\20\3C' attr(href) '\3E\20';
 		color: #666;
