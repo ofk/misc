@@ -1,7 +1,18 @@
 /*-----------------------------------------------------------------------------
  * x.css
+ *
  * Author: ofk
- * Version: 2010-11-27
+ * Version: 2010-12-14
+ *-----------------------------------------------------------------------------
+ * Yahoo UI Library Font-size Adjustment
+ * Copyright (c) 2006, Yahoo! Inc. All rights reserved.
+ * http://developer.yahoo.com/yui/license.txt
+ * http://developer.yahoo.com/yui/fonts/
+ * 10px = 77%     11px = 85%     12px = 93%     13px = 100%
+ * 14px = 108%    15px = 116%    16px = 123.1%  17px = 131%
+ * 18px = 138.5%  19px = 146.5%  20px = 153.9%  21px = 161.6%
+ * 22px = 167%    23px = 174%    24px = 182%    25px = 189%
+ * 26px = 197%
  *-------------------------------------------------------------------------- */
 
 /*
@@ -14,7 +25,7 @@
 /* remove HTML5: , hgroup, header, footer */
 , address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
 /* remove HTML5: , figure, figcaption */
-, div, a, em, strong, small, cite, q, dfn, abbr
+, div, a, em, strong, small, cite, q, dfn, abbr, acronym
 /* remove HTML5: , time */
 , code, var, samp, kbd, sub, sup, i, b
 /* remove HTML5: , mark */
@@ -96,7 +107,7 @@ menu */ {
 /* remove HTML5: , hgroup, header, footer */
 , address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
 /* remove HTML5: , figure, figcaption */
-, div, a, em, strong, small, cite, q, dfn, abbr
+, div, a, em, strong, small, cite, q, dfn, abbr, acronym
 /* remove HTML5: , time */
 , code, var, samp, kbd, sub, sup, i, b
 /* remove HTML5: , mark */
@@ -105,7 +116,7 @@ menu */ {
 /* remove HTML5: , video, audio, canvas */
 , table, caption, colgroup, tbody, thead, tfoot, tr, td, th
 , form, fieldset, legend, label
-/* remove form element: , input, button, select, textarea, keygen */
+/* remove forms: , input, button, select, textarea, keygen */
 /* remove HTML5: , keygen, output, progress, meter, details, summary, command,
 menu */ {
 	padding: 0;
@@ -114,43 +125,36 @@ menu */ {
 	text-align: inherit /* left */;
 }
 
+
 /*
  *= The root element
  */
 
-/*
-html {
-	color: #333;
-	background: #fff;
-}
-*/
 
 /*
  *= Sections
  */
 
 body {
-	color: #333;
-	background: #fff;
 	font: 13px/1.231 sans-serif;
 	*font-size: small;
 	*font: x-small;
 }
 
-h1 { font-size: 169.23%; /* 22px */ }
+h1 { font-size: 167%;   /* 22px */ }
 
-h2 { font-size: 153.85%; /* 20px */ }
+h2 { font-size: 153.9%; /* 20px */ }
 
-h3 { font-size: 138.46%; /* 18px */ }
+h3 { font-size: 138.5%; /* 18px */ }
 
-h4 { font-size: 123.08%; /* 16px */ }
+h4 { font-size: 123.1%; /* 16px */ }
 
-h5 { font-size: 115.38%; /* 15px */ }
+h5 { font-size: 116%;   /* 15px */ }
 
-h6 { font-size: 107.69%; /* 14px */ }
+h6 { font-size: 108%;   /* 14px */ }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: bold;
+	font-weight: bolder;
 }
 
 /*
@@ -159,6 +163,7 @@ section, nav, article, aside, hgroup, header, footer, figure, figcaption {
 	display: block;
 }
 */
+
 
 /*
  *= Grouping content
@@ -174,24 +179,20 @@ pre {
 	*overflow-y: hidden;
 	font-family: monospace;
 	white-space: -moz-pre-wrap; /* Fx */
-	white-space: -o-pre-wrap;   /* O7 */
-	white-space: -pre-wrap;     /* O4-6 */
-	white-space: pre-wrap;      /* CSS3 */
-	word-wrap: break-word;      /* IE5.5+ */
-	word-break: break-all;      /* IE5+ */
+	white-space: -o-pre-wrap; /* O7 */
+	white-space: -pre-wrap; /* O4-6 */
+	white-space: pre-wrap; /* CSS3 */
+	word-wrap: break-word; /* IE5.5+ */
+	word-break: break-all; /* IE5+ */
 }
 
-ol li       { list-style-type: decimal; }
+ol       { list-style-type: decimal; }
+ol ol    { list-style-type: lower-roman; }
+ol ol ol { list-style-type: lower-greek; }
 
-ol ol li    { list-style-type: lower-roman; }
-
-ol ol ol li { list-style-type: lower-greek; }
-
-ul li       { list-style-type: circle; }
-
-ul ul li    { list-style-type: disc; }
-
-ul ul ul li { list-style-type: square; }
+ul       { list-style-type: circle; }
+ul ul    { list-style-type: disc; }
+ul ul ul { list-style-type: square; }
 
 /*
 remove HTML5:
@@ -201,22 +202,17 @@ figcaption {
 }
 */
 
+
 /*
  *= Text-level semantics
  */
 
-:link {
-	color: #2200c1; /* Google Color */
+:link, :visited {
 	text-decoration: none;
 }
 
 :visited {
-	color: #551a8b; /* Google Color */
 	text-decoration: none;
-}
-
-:link:active, :visited:active {
-	color: #c11; /* Google Color */
 }
 
 :link:hover, :visited:hover, :link:active, :visited:active {
@@ -260,12 +256,21 @@ mark {
 }
 */
 
-abbr[title], dfn[title] {
-	border-bottom: 1px dotted #999;
+abbr, acronym {
+	letter-spacing: .1em;
+}
+
+acronym {
+	font-variant: normal; /* MacIE */
+}
+
+abbr[title], acronym[title], dfn[title] {
+	border-bottom: 1px dotted;
 	cursor: help;
 }
 
-a abbr[title], a dfn[title], label abbr[title], label dfn[title]  {
+  a     abbr[title], a     acronym[title], a     dfn[title]
+, label abbr[title], label acronym[title], label dfn[title]  {
 	cursor: inherit;
 }
 
@@ -276,21 +281,22 @@ em, var, i {
 */
 
 strong, dfn, b {
-	font-weight: bold;
+	font-weight: bolder;
 }
+
 
 /*
  *= Edits
  */
 
 del {
-	color: #666;
 	text-decoration: line-through;
 }
 
 ins {
-	border-bottom: 1px dotted #999;
+	border-bottom: 1px dotted;
 }
+
 
 /*
  *= Embedded content
@@ -298,7 +304,9 @@ ins {
 
 img {
 	vertical-align: bottom;
+	-ms-interpolation-mode: bicubic;
 }
+
 
 /*
  *= Tabular data
@@ -309,7 +317,7 @@ table {
 }
 
 th {
-	font-weight: bold;
+	font-weight: bolder;
 }
 
 caption {
@@ -317,20 +325,79 @@ caption {
 }
 
 table, td, th {
-	border: 1px solid #999;
+	border: 1px solid;
 }
+
 
 /*
  *= Forms
  */
 
 legend {
+	color: inherit;
+}
+
+input, button, select, textarea {
+	font: 99% sans-serif;
+	outline: none;
+}
+
+input {
+	line-height: 1; /* NN7 */
+}
+
+  input[type='submit']::-moz-focus-inner
+, input[type='button']::-moz-focus-inner
+, button::-moz-focus-inner {
+	padding: 0;
+	border: 0 none transparent;
+}
+
+
+/*
+ *= Interactive elements
+ */
+
+object {
+	outline: none;
+}
+
+
+/*
+ *= Color Setting
+ */
+
+body {
 	color: #333;
+	background: #fff;
+}
+
+:link {
+	color: #2200c1; /* Google Color */
+}
+
+:visited {
+	color: #551a8b; /* Google Color */
+}
+
+:link:active, :visited:active {
+	color: #c11; /* Google Color */
+}
+
+abbr[title], acronym[title], dfn[title] {
+	border-color: #999;
+}
+
+del {
+	color: #666;
+}
+
+ins {
+	border-color: #999;
 }
 
 input, button, select, textarea {
 	color: #333;
-	font: 99% sans-serif;
 	/* IE9+, Fx(4), Cr, Sf(5), O10.5+ */
 	border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -392,7 +459,6 @@ input[type='submit'], input[type='button'], button {
   input[type='text']:focus, input[type='password']:focus, textarea:focus
 , select:focus, input[type='submit']:hover, input[type='button']:hover
 , button:hover {
-	outline: none;
 	border-color: #7be;
 	/* IE9+, Fx, Cr, Sf, O */
 	/* border-color: rgba(85, 170, 238, .75); */
@@ -402,7 +468,6 @@ input[type='submit'], input[type='button'], button {
   input[type='submit']:focus, input[type='button']:focus, button:focus
 , input[type='submit']:active, input[type='button']:active, button:active {
 	background: #ddd;
-	outline: none;
 	filter: progid:DXImageTransform.Microsoft.Gradient(enabled=false);
 }
 
@@ -418,17 +483,6 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 , button:disabled:hover {
 	border-color: #ccc;
 }
-
-  input[type='submit']::-moz-focus-inner
-, input[type='button']::-moz-focus-inner
-, button::-moz-focus-inner {
-	padding: 0;
-	border: 0 none transparent;
-}
-
-/*
- *= Interactive elements
- */
 
 
 /*
@@ -466,6 +520,7 @@ dl dd {
  */
 
 /*
+
 .cfx:after {
 	display: block;
 	clear: both;
@@ -494,7 +549,9 @@ dl dd {
 .disable {
 	cursor: default !important;
 }
+
 */
+
 
 /*
  *= Screen Styles
@@ -559,7 +616,7 @@ dl dd {
 	}
 
 	:link, :visited {
-		font-weight: bold;
+		font-weight: bolder;
 		text-decoration: underline;
 	}
 
