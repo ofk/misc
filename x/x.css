@@ -194,6 +194,8 @@ ul       { list-style-type: circle; }
 ul ul    { list-style-type: disc; }
 ul ul ul { list-style-type: square; }
 
+li       { list-style-type: inherit; }
+
 /*
 remove HTML5:
 figcaption {

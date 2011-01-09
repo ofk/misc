@@ -1,0 +1,492 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>utest</title>
+</head>
+<body></body>
+<script type="text/javascript" src="bigint.js"></script>
+<script type="text/javascript" src="./utest.js"></script>
+<script type="text/javascript">
+function generator() {
+	var f = false, length = arguments.length;
+	var res = new Bigint;
+	res._digits = new Array(length);
+	for (var i = 0, iz = length; i < iz; ++i) {
+		var n = arguments[i];
+		if (n) f = true;
+		if (f) ++res._used;
+		while (n < 0) n += (1 << 15);
+		res._digits[length - i - 1] = n;
+	}
+	res._used = res._used || 1;
+	return res;
+}
+
+utest('generator()', [
+	function () {
+		var b = generator(0);
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits, [ 0 ] ]
+		];
+	},
+	function () {
+		var b = generator(0, 0, 0, 0);
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits, [ 0, 0, 0, 0 ] ]
+		];
+	},
+	function () {
+		var b = generator(1, 2, 3, 4);
+		return [
+			[ b._sign, false ],
+			[ b._used, 4 ],
+			[ b._digits, [ 4, 3, 2, 1 ] ]
+		];
+	},
+	function () {
+		var b = generator(0, 0, 0, 0, 1, 2, 3, 4, 0, 0);
+		return [
+			[ b._sign, false ],
+			[ b._used, 6 ],
+			[ b._digits, [ 0, 0, 4, 3, 2, 1, 0, 0, 0, 0 ] ]
+		];
+	}
+]);
+
+utest('#init(int)', [
+	function () {
+		var b = new Bigint(123);
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint(-123);
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint(1234567890);
+		return [
+			[ b._sign, false ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint(-1234567890);
+		return [
+			[ b._sign, true ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	}
+]);
+utest('#init(float)', [
+	function () {
+		var b = new Bigint(123.987);
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint(-123.987);
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint(1234567890.987);
+		return [
+			[ b._sign, false ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint(-1234567890.987);
+		return [
+			[ b._sign, true ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	}
+]);
+utest('#init(string)', [
+	function () {
+		var b = new Bigint("123");
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-123");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("1234567890");
+		return [
+			[ b._sign, false ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-1234567890");
+		return [
+			[ b._sign, true ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint("123.987");
+		return [
+			[ b._sign, false ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-123.987");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("1234567890.987");
+		return [
+			[ b._sign, false ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-1234567890.987");
+		return [
+			[ b._sign, true ],
+			[ b._used, 3 ],
+			[ b._digits[0], 722 ],
+			[ b._digits[1], 4908 ],
+			[ b._digits[2], 1 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-0b1111011");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-0173");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-0o173");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-0x7b");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-1.23e+2");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 123 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-1.23e+1");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 12 ]
+		];
+	},
+	function () {
+		var b = new Bigint("-1e+2");
+		return [
+			[ b._sign, true ],
+			[ b._used, 1 ],
+			[ b._digits[0], 100 ]
+		];
+	},
+	function () {
+		var b = new Bigint("12345678901234567890");
+		return [
+			[ b._sign, false ],
+			[ b._used, 5 ],
+			[ b._digits[0], 2770 ],
+			[ b._digits[1], 22078 ],
+			[ b._digits[2], 9779 ],
+			[ b._digits[3], 23205 ],
+			[ b._digits[4], 10 ]
+		];
+	}
+]);
+
+utest('#equals()', [
+	function () {
+		return [ [ true, (new Bigint('123')).equals(new Bigint('123')) ] ];
+	},
+	function () {
+		return [ [ true, (new Bigint('12345678901234567890')).equals(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ true, (new Bigint('-123')).equals(new Bigint('-123')) ] ];
+	},
+	function () {
+		return [ [ true, (new Bigint('-12345678901234567890')).equals(new Bigint('-12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ false, (new Bigint('12345678901234567890')).equals(new Bigint('-12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ false, (new Bigint('12345678901234567890')).equals(new Bigint('1')) ] ];
+	},
+	function () {
+		return [ [ false, (new Bigint('12345678901234567890')).equals(new Bigint('12345678901234567891')) ] ];
+	},
+	function () {
+		return [ [ true, (new Bigint('12345678901234567890')).equals(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ true, (new Bigint('12345678901234567890')).equals(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ true, generator(10, 23205, 9779, 22078, 2770).equals(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ true, generator(10, 23205, 9779, 22078, 2770).equals(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ true, generator(10, 23205, 9779, 22078, 2770).equals(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ true, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).equals(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ true, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).equals(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ true, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).equals(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	}
+]);
+
+utest('#compareTo()', [
+	function () {
+		return [ [ 0, (new Bigint('12345678901234567890')).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 0, (new Bigint('12345678901234567890')).compareTo(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, (new Bigint('12345678901234567890')).compareTo(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, generator(10, 23205, 9779, 22078, 2770).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 0, generator(10, 23205, 9779, 22078, 2770).compareTo(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, generator(10, 23205, 9779, 22078, 2770).compareTo(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 0, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).compareTo(generator(10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770).compareTo(generator(0, 0, 0, 0, 10, 23205, 9779, 22078, 2770)) ] ];
+	},
+	function () {
+		return [ [ 0, (new Bigint('-12345678901234567890')).compareTo(new Bigint('-12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 1, (new Bigint('12345678901234567890')).compareTo(new Bigint('-12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ -1, (new Bigint('-12345678901234567890')).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 1, (new Bigint('12345678901234567890')).compareTo(new Bigint('1')) ] ];
+	},
+	function () {
+		return [ [ -1, (new Bigint('1')).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ 1, (new Bigint('12345678901234567891')).compareTo(new Bigint('12345678901234567890')) ] ];
+	},
+	function () {
+		return [ [ -1, (new Bigint('12345678901234567890')).compareTo(new Bigint('12345678901234567891')) ] ];
+	}
+]);
+
+utest('#clone()', [
+	function () {
+		var b = new Bigint('0');
+		return [ [ b, b.clone() ] ];
+	},
+	function () {
+		var b = new Bigint('12345678901234567890');
+		return [ [ b, b.clone() ] ];
+	},
+	function () {
+		var b = new Bigint('-12345678901234567890');
+		return [ [ b, b.clone() ] ];
+	}
+]);
+
+utest('#_normalize()', [
+	function () {
+		var b = generator(1)._normalize();
+		return [ [ 1, b._used ] ];
+	},
+	function () {
+		var b = generator(1, 2, 3)._normalize();
+		return [ [ 3, b._used ] ];
+	},
+	function () {
+		var b = generator(0, 0, 0, 1);
+		b._used = 4;
+		b = b._normalize();
+		return [ [ 1, b._used ] ];
+	},
+	function () {
+		var b = generator(0, 0, 0, 1, 2, 3);
+		b._used = 4;
+		b = b._normalize();
+		return [ [ 3, b._used ] ];
+	}
+]);
+
+utest('#toNumber()', [
+	function () {
+		var n = 0;
+		return [ [ n, (new Bigint(n)).toNumber() ] ];
+	},
+	function () {
+		var n = 1234567890;
+		return [ [ n, (new Bigint(n)).toNumber() ] ];
+	},
+	function () {
+		var n = -1234567890;
+		return [ [ n, (new Bigint(n)).toNumber() ] ];
+	}
+]);
+
+utest('#toString()', [
+	function () {
+		var n = '0';
+		var b = new Bigint(n);
+		return [ [ n, b.toString() ] ];
+	},
+	function () {
+		var n = '98765432109876543210';
+		var b = new Bigint(n);
+		return [ [ n, b.toString() ] ];
+	},
+	function () {
+		var n = '-98765432109876543210';
+		var b = new Bigint(n);
+		return [ [ n, b.toString() ] ];
+	},
+	function () {
+		var n = '1001100011100001111000001111100000011111110011000111000011110000011111000000111111';
+		var b = new Bigint('0b' + n);
+		return [ [ n, b.toString(2) ] ];
+	},
+	function () {
+		var n = '7654321076543210765432107654321076543210765432107654321076543210';
+		var b = new Bigint('0o' + n);
+		return [ [ n, b.toString(8) ] ];
+	},
+	function () {
+		var n = 'fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210';
+		var b = new Bigint('0x' + n);
+		return [ [ n, b.toString(16) ] ];
+	}
+]);
+
+utest('#isZero()', [
+	function () {
+		var b = new Bigint(0);
+		return [ [ true, b.isZero() ] ];
+	},
+	function () {
+		var b = new Bigint('0');
+		return [ [ true, b.isZero() ] ];
+	},
+	function () {
+		var b = new Bigint('-0');
+		return [ [ true, b.isZero() ] ];
+	},
+	function () {
+		var b = new Bigint('0').negate();
+		return [ [ true, b.isZero() ] ];
+	},
+	function () {
+		var b = generator(1, 0);
+		b._used = 1;
+		b = b._normalize();
+		return [ [ true, b.isZero() ] ];
+	}
+]);
+</script>
+<script type="text/javascript" src="./utest_calc.js"></script>
+</html>
