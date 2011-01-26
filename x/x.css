@@ -2,7 +2,7 @@
  * x.css
  *
  * Author: ofk
- * Version: 2010-12-14
+ * Version: 2011-01-27
  *-----------------------------------------------------------------------------
  * Yahoo UI Library Font-size Adjustment
  * Copyright (c) 2006, Yahoo! Inc. All rights reserved.
@@ -136,7 +136,7 @@ menu */ {
  */
 
 body {
-	font: 13px/1.231 sans-serif;
+	font: 13px/1.231 sans-serif; /* 13 / 16 */
 	*font-size: small;
 	*font: x-small;
 }
