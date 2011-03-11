@@ -2,7 +2,7 @@
  * x.css
  *
  * Author: ofk
- * Version: 2011-01-27
+ * Version: 2011-03-11
  *-----------------------------------------------------------------------------
  * Yahoo UI Library Font-size Adjustment
  * Copyright (c) 2006, Yahoo! Inc. All rights reserved.
@@ -16,113 +16,100 @@
  *-------------------------------------------------------------------------- */
 
 /*
- *= All reset
+ *= All Reset
+ * ref. http://meyerweb.com/eric/tools/css/reset/
  */
 
-  html, body
-/* remove HTML5: , section, nav, article, aside */
+  html
+, body
+/* , section, nav, article, aside */
 , h1, h2, h3, h4, h5, h6
-/* remove HTML5: , hgroup, header, footer */
-, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
-/* remove HTML5: , figure, figcaption */
-, div, a, em, strong, small, cite, q, dfn, abbr, acronym
-/* remove HTML5: , time */
+/*, hgroup, header, footer */
+, address
+, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
+/* , figure, figcaption */
+, div
+, a, em, strong, small, big, s, cite, q, dfn, abbr, acronym
+/* , time */
 , code, var, samp, kbd, sub, sup, i, b
-/* remove HTML5: , mark */
-/* remove ruby and bdo: , ruby, rt, rp, bdo */
-, span, ins, del, img, iframe, object
-/* remove HTML5: , video, audio, canvas */
-, table, caption, colgroup, tbody, thead, tfoot, tr, td, th
-, form, fieldset, legend, label, input, button, select, textarea
-/* remove HTML5: , keygen, output, progress, meter, details, summary, command,
-menu */ {
+/* , mark, ruby, rt, rp, bdi, bdo */
+, span
+, ins, del
+, img, iframe, embed, object
+/* , video, audio, canvas */
+, table, caption, tbody, thead, tfoot, tr, td, th
+, form, fieldset, legend, label /* , input, button, select */
+/* , datalist */
+/* , option, textarea */
+/* , keygen, output, progress, meter */
+/* , details, summary, command, menu */
+{
+	/* ブラウザごとに値が異なるため。0pxのときもIEのみautoであるため */
 	margin: 0;
-	/* padding: 0; */
-	/* border: 0 none transparent; */
-	/* display: ?; */
-	/*
-	position: static;
-	top: auto;
-	right: auto;
-	bottom: auto;
-	left: auto;
-	float: none;
-	clear: none;
-	z-index: auto;
-	direction: ltr;
-	unicode-bidi: normal;
-	width: auto;
-	min-width: 0;
-	max-width: none;
-	height: auto;
-	min-height: 0;
-	max-height: none;
-	line-height: normal;
-	vertical-align: baseline;
-	overflow: visible;
-	clip: auto;
-	visibility: visible;
-	*/
-	/* content: none; */
-	quotes: none;
-	/*
-	counter-reset: none;
-	counter-increment: none;
-	*/
-	list-style: none none outside;
-	/*
-	page-break-before: auto;
-	page-break-after: auto;
-	page-break-inside: auto;
-	orphans: 2;
-	widows: 2;
-	*/
-	/* color: ?; */
-	/* background: transparent none no-repeat scroll 0 0; */
-	/* font: ?; */
-	/* font-family: ?; */
-	font-style: inherit /* normal */;
-	/* font-variant: normal; */
-	font-weight: inherit /* normal */;
+	/* ブラウザごとに値が異なるため */
+	padding: 0;
+	/* 0 noneのところでIEのみmedium noneであるため */
+	border: 0 none;
+	/* outline: 0 none; */
+	/* フォントの継承周りを修正する */
 	font-size: 100%;
-	/* text-indent: 0; */
-	/* text-align: left; */
-	text-decoration: inherit /* none */;
-	/* letter-spacing: normal; */
-	/* word-spacing: normal; */
-	/* text-transform: none; */
-	/* white-space: normal; */
-	caption-side: top;
-	table-layout: auto;
-	border-collapse: collapse;
-	border-spacing: 0;
-	empty-cells: show;
-	/* cursor: auto; */
-	/* outline: ?; */
+	font: inherit;
+	/* IEのみautoであるため */
+	vertical-align: baseline;
+	/* ブラウザごとに値が異なるため */
+	quotes: none;
+	/* 背景画像の置き換えを多用するため */
+	background-repeat: no-repeat;
+	background-position: 0 0;
 }
 
-  html, body
-/* remove HTML5: , section, nav, article, aside */
-, h1, h2, h3, h4, h5, h6
-/* remove HTML5: , hgroup, header, footer */
-, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
-/* remove HTML5: , figure, figcaption */
-, div, a, em, strong, small, cite, q, dfn, abbr, acronym
-/* remove HTML5: , time */
-, code, var, samp, kbd, sub, sup, i, b
-/* remove HTML5: , mark */
-/* remove ruby and bdo: , ruby, rt, rp, bdo */
-, span, ins, del, img, iframe, object
-/* remove HTML5: , video, audio, canvas */
-, table, caption, colgroup, tbody, thead, tfoot, tr, td, th
-, form, fieldset, legend, label
-/* remove forms: , input, button, select, textarea, keygen */
-/* remove HTML5: , keygen, output, progress, meter, details, summary, command,
-menu */ {
+  input, button, select
+/* , datalist */
+, option, textarea
+/* , keygen, output, progress, meter */
+/* , details, summary, command, menu */
+{
+	/* ブラウザごとに値が異なるため。0pxのときもIEのみautoであるため */
+	margin: 0;
+	/* ブラウザごとに値が異なるため */
 	padding: 0;
-	border: 0 none transparent;
-	background: transparent none no-repeat scroll 0 0;
-	text-align: inherit /* left */;
+	/* 0 noneのところでIEのみmedium noneであるため */
+	/* UI固有のCSSを破壊しないために指定しない */
+	/* border: 0 none; */
+	/* outline: 0 none; */
+	/* フォントの継承周りを修正する */
+	font: 99% sans-serif;
+	/* IEのみautoであるため */
+	/* vertical-align: baseline; */
+	/* ブラウザごとに値が異なるため */
+	quotes: none;
+	/* 背景画像の置き換えを多用するため */
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+button, option, textarea {
+	vertical-align: baseline;
+}
+
+option {
+	font-size: 100%;
+}
+
+/* IEでinlineになっているため */
+/* html, hr
+/* , section, nav, article, aside, hgroup, header, footer, figure,
+figcaption, video, audio, canvas * /
+{
+	display: block;
+}
+/* */
+
+/* フォントスタイルの継承ができた方が便利なため */
+  h1, h2, h3, h4, h5, h6
+, address, em, strong, cite, dfn, code, var, i, b {
+	font-style: inherit;
+	font-weight: inherit;
 }
 
 
@@ -157,19 +144,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: bolder;
 }
 
-/*
-remove HTML5:
-section, nav, article, aside, hgroup, header, footer, figure, figcaption {
-	display: block;
-}
-*/
-
 
 /*
  *= Grouping content
  */
 
 hr {
+	/* 表示されてもよいことはあまり無いため */
 	display: none;
 }
 
@@ -177,13 +158,16 @@ pre {
 	*width: 100%;
 	overflow: auto;
 	*overflow-y: hidden;
-	font-family: monospace;
 	white-space: -moz-pre-wrap; /* Fx */
 	white-space: -o-pre-wrap; /* O7 */
 	white-space: -pre-wrap; /* O4-6 */
 	white-space: pre-wrap; /* CSS3 */
 	word-wrap: break-word; /* IE5.5+ */
 	word-break: break-all; /* IE5+ */
+}
+
+pre, code, samp, kbd {
+	font-family: monospace, sans-serif;
 }
 
 ol       { list-style-type: decimal; }
@@ -197,10 +181,8 @@ ul ul ul { list-style-type: square; }
 li       { list-style-type: inherit; }
 
 /*
-remove HTML5:
 figcaption {
-	font-size: 84.62%;
-	text-align: center;
+	font-size: 85%;
 }
 */
 
@@ -213,12 +195,20 @@ figcaption {
 	text-decoration: none;
 }
 
-:visited {
-	text-decoration: none;
+em, var, i {
+	font-style: italic;
 }
 
-:link:hover, :visited:hover, :link:active, :visited:active {
-	text-decoration: underline;
+strong, dfn, b {
+	font-weight: bolder;
+}
+
+small, sub, sup {
+	font-size: smaller;
+}
+
+big {
+	font-size: larger;
 }
 
 q:before {
@@ -228,35 +218,6 @@ q:before {
 q:after {
 	content: close-quote;
 }
-
-code, samp, kbd {
-	font-family: monospace;
-}
-
-sub {
-	vertical-align: sub;
-}
-
-sup {
-	vertical-align: super;
-}
-
-sub, sup {
-	line-height: normal;
-}
-
-small, sub, sup {
-	font-size: smaller;
-}
-
-/*
-remove HTML5:
-mark {
-	display: inline;
-	color: #000;
-	background: #ff9;
-}
-*/
 
 abbr, acronym {
 	letter-spacing: .1em;
@@ -271,19 +232,17 @@ abbr[title], acronym[title], dfn[title] {
 	cursor: help;
 }
 
-  a     abbr[title], a     acronym[title], a     dfn[title]
+  :link abbr[title], :link acronym[title], :link dfn[title]
 , label abbr[title], label acronym[title], label dfn[title]  {
 	cursor: inherit;
 }
 
-/*
-em, var, i {
-	font-style: italic;
+sub {
+	vertical-align: sub;
 }
-*/
 
-strong, dfn, b {
-	font-weight: bolder;
+sup {
+	vertical-align: super;
 }
 
 
@@ -297,15 +256,21 @@ del {
 
 ins {
 	border-bottom: 1px dotted;
+	text-decoration: none;
 }
-
 
 /*
  *= Embedded content
  */
 
-img {
+  img, iframe, embed, object
+/* , video, audio, canvas */
+{
 	vertical-align: bottom;
+	outline: 0 none;
+}
+
+img {
 	-ms-interpolation-mode: bicubic;
 }
 
@@ -315,15 +280,12 @@ img {
  */
 
 table {
-	font: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 th {
 	font-weight: bolder;
-}
-
-caption {
-	text-align: center;
 }
 
 table, td, th {
@@ -339,29 +301,54 @@ legend {
 	color: inherit;
 }
 
-input, button, select, textarea {
-	font: 99% sans-serif;
-	outline: none;
-}
-
 input {
 	line-height: 1; /* NN7 */
+}
+
+/* http://www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {
+	width: auto;
+	overflow: visible;
 }
 
   input[type='submit']::-moz-focus-inner
 , input[type='button']::-moz-focus-inner
 , button::-moz-focus-inner {
 	padding: 0;
-	border: 0 none transparent;
+	border: 0 none;
 }
 
 
 /*
- *= Interactive elements
+ *= Margin Setting
  */
 
-object {
-	outline: none;
+h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset
+/* , menu */
+{
+	margin: 1em 0;
+}
+
+blockquote, figure {
+	margin: 1em;
+}
+
+  ol ol, ol ul, ol dl /* , ol menu */
+, ul ol, ul ul, ul dl /* , ul menu */
+, dl ol, dl ul, dl dl /* , dl menu */
+/* , menu ol, menu ul, menu dl, menu menu */
+{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+ol, ul /* , menu */
+{
+	margin-left: 2em;
+}
+
+dl dd {
+	margin-left: 1em;
 }
 
 
@@ -376,6 +363,7 @@ body {
 
 :link {
 	color: #2200c1; /* Google Color */
+	/* -webkit-tap-highlight-color: ; */
 }
 
 :visited {
@@ -388,6 +376,11 @@ body {
 
 abbr[title], acronym[title], dfn[title] {
 	border-color: #999;
+}
+
+mark {
+	color: #000;
+	background: #ff9;
 }
 
 del {
@@ -463,7 +456,7 @@ input[type='submit'], input[type='button'], button {
 , button:hover {
 	border-color: #7be;
 	/* IE9+, Fx, Cr, Sf, O */
-	/* border-color: rgba(85, 170, 238, .75); */
+	border-color: rgba(85, 170, 238, .75);
 	color: #000;
 }
 
@@ -486,53 +479,16 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 	border-color: #ccc;
 }
 
-
 /*
- *= Margin Setting
- */
-
-/* remove HTML5: */
-h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset /* , menu */ {
-	margin: 1em 0;
-}
-
-blockquote, figure {
-	margin: 1em;
-}
-
-  ol ol, ol ul, ol dl /* , ol menu */
-, ul ol, ul ul, ul dl /* , ul menu */
-, dl ol, dl ul, dl dl /* , dl menu */
-/* , menu ol, menu ul, menu dl, menu menu */ {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-ol, ul /* , menu */ {
-	margin-left: 2em;
-}
-
-dl dd {
-	margin-left: 1em;
-}
-
+::-moz-selection {}
+::selection {}
+*/
 
 /*
  *= Common classes
  */
 
-/*
-
-.cfx:after {
-	display: block;
-	clear: both;
-	content: "";
-}
-
-.cfx {
-	*zoom: 1;
-}
-
+/* For image replacement */
 .fir {
 	display: inline-block;
 	overflow: hidden;
@@ -540,6 +496,24 @@ dl dd {
 	background-position: left top;
 	text-indent: -9999px;
 	text-align: left;
+	direction: ltr;
+}
+
+/* Clearfix */
+.cfx:before,
+.cfx:after {
+	display: block;
+	height: 0;
+	overflow: hidden;
+	content: "\0020";
+}
+
+.cfx:after {
+	clear: both;
+}
+
+.cfx {
+	*zoom: 1;
 }
 
 .flat {
@@ -551,8 +525,6 @@ dl dd {
 .disable {
 	cursor: default !important;
 }
-
-*/
 
 
 /*
@@ -631,3 +603,8 @@ dl dd {
 	}
 
 }
+
+
+/*-----------------------------------------------------------------------------
+ * EOF
+ *-------------------------------------------------------------------------- */
