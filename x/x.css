@@ -799,7 +799,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 
 /*-----------------------------------------------------------------------------
  *= Screen Styles
- *-------------------------------------------------------------------------- * /
+ *-------------------------------------------------------------------------- */
 
 @media screen {
 
@@ -821,7 +821,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 
 /*-----------------------------------------------------------------------------
  *= Print Styles
- *-------------------------------------------------------------------------- * /
+ *-------------------------------------------------------------------------- */
 
 @media print {
 
@@ -835,7 +835,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 
 	  [href^='http://']:after, [href^='https://']:after
 	, [href^='ftp://']:after, [href^='ftps://']:after
-	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after * /
+	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after */
 	{
 		content: '\20\3C' attr(href) '\3E\20';
 		color: #666;
