@@ -2,7 +2,11 @@
  * x.css
  *
  * Author: ofk
- * Version: 2011-03-11
+ * Version: 2011-03-14
+ * Reference:
+ * - http://www.w3.org/TR/html5/spec.html
+ * - http://kojika17.com/2011/03/browsers-default-css.php
+ * - http://developer.yahoo.com/yui/fonts/
  *-----------------------------------------------------------------------------
  * Yahoo UI Library Font-size Adjustment
  * Copyright (c) 2006, Yahoo! Inc. All rights reserved.
@@ -15,101 +19,61 @@
  * 26px = 197%
  *-------------------------------------------------------------------------- */
 
-/*
+/*-----------------------------------------------------------------------------
  *= All Reset
- * ref. http://meyerweb.com/eric/tools/css/reset/
- */
+ *-------------------------------------------------------------------------- */
 
+/* 全称セレクタを使っているので，実際の利用時はタグ集合に置き換える． */
   html
 , body
-/* , section, nav, article, aside */
+/*! , section, nav, article, aside */
 , h1, h2, h3, h4, h5, h6
-/*, hgroup, header, footer */
-, address
-, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd
-/* , figure, figcaption */
+/*! , hgroup, header, footer */
+, address, p, hr, pre, blockquote
+, ol, ul, dl, dt, dd
+/*! , figure, figurecaption */
 , div
-, a, em, strong, small, big, s, cite, q, dfn, abbr, acronym
-/* , time */
+, a, em, strong, small, s, cite, q, dfn, abbr, acronym
+/*! , time */
 , code, var, samp, kbd, sub, sup, i, b
-/* , mark, ruby, rt, rp, bdi, bdo */
-, span
-, ins, del
+/*! , mark, ruby, rt, rp */
+, span, ins, del
 , img, iframe, embed, object
-/* , video, audio, canvas */
+/*! , video, canvas */
 , table, caption, tbody, thead, tfoot, tr, td, th
-, form, fieldset, legend, label /* , input, button, select */
-/* , datalist */
-/* , option, textarea */
-/* , keygen, output, progress, meter */
-/* , details, summary, command, menu */
+, form, fieldset, legend, label
+/*! , details, summary, command, menu */
 {
-	/* ブラウザごとに値が異なるため。0pxのときもIEのみautoであるため */
+	/* marginが0である要素は，IEではautoである．
+	   また，0が指定されている方が，使い勝手が良いため． */
 	margin: 0;
-	/* ブラウザごとに値が異なるため */
+	/* 古いOperaでmarginの代わりにpaddingを設定している場合がある */
 	padding: 0;
-	/* 0 noneのところでIEのみmedium noneであるため */
+	/* borderが0 noneである要素は，IEではmedium noneである．
+	   指定するとinput等フォームのデザインが破壊される． */
 	border: 0 none;
-	/* outline: 0 none; */
-	/* フォントの継承周りを修正する */
-	font-size: 100%;
+	/* fontの継承をリセットする． */
 	font: inherit;
-	/* IEのみautoであるため */
+	font-size: 100%; /* IE */
+	/* vertical-alignがbaselineである要素は，IEではautoである．
+	   inputは初期化しない方が望ましい． */
 	vertical-align: baseline;
-	/* ブラウザごとに値が異なるため */
+	/* Firefoxでは"“" "”" "‘" "’"である．IE8ではautoである． */
 	quotes: none;
-	/* 背景画像の置き換えを多用するため */
+	/* 背景画像の置き換えを多用するため． */
+	background-image: none;
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
 
-  input, button, select
-/* , datalist */
-, option, textarea
-/* , keygen, output, progress, meter */
-/* , details, summary, command, menu */
+input, button, select
+/*! , datalist */
+, optgroup, option, textarea
+/*! , keygen, output, progress, meter */
 {
-	/* ブラウザごとに値が異なるため。0pxのときもIEのみautoであるため */
 	margin: 0;
-	/* ブラウザごとに値が異なるため */
-	padding: 0;
-	/* 0 noneのところでIEのみmedium noneであるため */
-	/* UI固有のCSSを破壊しないために指定しない */
-	/* border: 0 none; */
-	/* outline: 0 none; */
-	/* フォントの継承周りを修正する */
-	font: 99% sans-serif;
-	/* IEのみautoであるため */
-	/* vertical-align: baseline; */
-	/* ブラウザごとに値が異なるため */
+	font: inherit;
 	quotes: none;
-	/* 背景画像の置き換えを多用するため */
-	background-repeat: no-repeat;
-	background-position: 0 0;
-}
-
-button, option, textarea {
-	vertical-align: baseline;
-}
-
-option {
-	font-size: 100%;
-}
-
-/* IEでinlineになっているため */
-/* html, hr
-/* , section, nav, article, aside, hgroup, header, footer, figure,
-figcaption, video, audio, canvas * /
-{
-	display: block;
-}
-/* */
-
-/* フォントスタイルの継承ができた方が便利なため */
-  h1, h2, h3, h4, h5, h6
-, address, em, strong, cite, dfn, code, var, i, b {
-	font-style: inherit;
-	font-weight: inherit;
 }
 
 
@@ -117,16 +81,416 @@ figcaption, video, audio, canvas * /
  *= The root element
  */
 
+html {
+	/* display: block; *//* IE: inline?; */
+}
+
+
+/*
+ *= Document metadata
+ */
+
+/* 初期値で問題ないため，指定せず */
+/* head {} */
+/* title {} */
+/* base {} */
+/* link {} */
+/* meta {} */
+/* style {} */
+
+
+/*
+ *= Scripting
+ */
+
+/* 初期値で問題ないため，指定せず */
+/* script {} */
+/* noscript {} */
+
 
 /*
  *= Sections
  */
 
 body {
+	/* margin: 0; */
 	font: 13px/1.231 sans-serif; /* 13 / 16 */
 	*font-size: small;
 	*font: x-small;
 }
+
+section {
+	/* display: block; /* IE: inline; */
+}
+
+nav {
+	/* display: block; /* IE: inline; */
+}
+
+article {
+	/* display: block; /* IE: inline; */
+}
+
+aside {
+	/* display: block; /* IE: inline; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/* margin: 0;
+	font-size: 100%; /* font-sizeを初期化した方が利用しやすいため */
+}
+
+hgroup {
+	/* display: block; /* IE: inline; */
+}
+
+header {
+	/* display: block; /* IE: inline; */
+}
+
+footer {
+	/* display: block; /* IE: inline; */
+}
+
+address {
+	/* margin: 0;
+	font-style: inherit; */
+}
+
+
+/*
+ *= Grouping content
+ */
+
+p {
+	/* margin: 0; */
+}
+
+hr {}
+
+pre {
+	/* margin: 0; */
+	/* font-family: monospace, sans-serif; */
+}
+
+blockquote {
+	/* margin: 0; */
+}
+
+ol {
+	/* margin: 0;
+	padding: 0; */
+}
+
+ul {
+	/* margin: 0;
+	padding: 0; */
+}
+
+ol       { list-style-type: decimal; }
+ol ol    { list-style-type: lower-roman; }
+ol ol ol { list-style-type: lower-greek; }
+
+ul       { list-style-type: circle; }
+ul ul    { list-style-type: disc; }
+ul ul ul { list-style-type: square; }
+
+li       { list-style-type: inherit; }
+
+dl {
+	/* margin: 0; */
+}
+
+dt {
+	/* margin: 0; */
+}
+
+dd {
+	/* margin: 0; */
+}
+
+figure {
+	/* display: block; /* IE: inline; */
+}
+
+figcaption {
+	/* display: block; /* IE: inline; */
+}
+
+div {}
+
+
+/*
+ *= Text-level semantics
+ */
+
+a {
+	/* text-decoration: none; */
+}
+
+em {
+	/* font-style: italic; */
+}
+
+strong {
+	/* font-weight: bolder; /* IE: bold; */
+}
+
+small {
+	/* font-size: smaller; */
+}
+
+s {}
+
+cite {
+	/* font-style: inherit; */
+}
+
+q {
+	/* font-style: inherit; */
+}
+
+dfn {}
+
+abbr, acronym {}
+
+time {}
+
+code {
+	/* font-family: monospace, sans-serif; */
+}
+
+var {
+	/* font-family: monospace, sans-serif; */
+}
+
+samp {
+	/* font-family: monospace, sans-serif; */
+}
+
+kbd {
+	/* font-family: monospace, sans-serif; */
+}
+
+sub {
+	vertical-align: sub;
+	/* font-size: smaller; */
+}
+
+sup {
+	vertical-align: super;
+	/* font-size: smaller; */
+}
+
+em, i {
+	font-style: italic;
+}
+
+strong, b {
+	font-weight: bolder; /* IE: bold; */
+}
+
+mark {}
+
+ruby {}
+
+rt {}
+
+rp {}
+
+/* bdi {} */
+
+/* bdo {} */
+
+span {}
+
+/* br {} */
+
+/* wbr {} */
+
+pre, code, var, samp, kbd {
+	font-family: monospace, sans-serif;
+}
+
+small, sub, sup {
+	font-size: smaller;
+}
+
+/*
+ *= Edits
+ */
+
+ins {
+	/* text-decoration: none; */
+}
+
+del {}
+
+a, ins {
+	text-decoration: none;
+}
+
+
+/*
+ *= Embedded content
+ */
+
+img {}
+
+iframe {}
+
+embed {}
+
+object {}
+
+/* param {} */
+
+video {}
+
+/* audio {} */
+
+/* source {} */
+
+/* track {} */
+
+canvas {}
+
+/* map {} */
+
+/* area {} */
+
+
+/*
+ *= Tabular data
+ */
+
+table {
+	/* margin: 0;
+	border: 0 none; /* borderを消した方が利用しやすいため */
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption {}
+
+/* colgroup {} */
+
+/* col {} */
+
+tbody, thead, tfoot {
+	/* border: 0 none; */
+	vertical-align: middle;
+}
+
+tr {
+	/* vertical-align: inherit; */
+}
+
+td {
+	/* padding: 0; */
+	/* vertical-align: inherit; */
+}
+
+th {
+	/* padding: 0; */
+	/* vertical-align: inherit; */
+}
+
+tr, td, th {
+	vertical-align: inherit;
+}
+
+
+/*
+ *= Forms
+ */
+
+form {
+	/* margin: 0; */
+}
+
+fieldset {
+	/* margin: 0; */
+}
+
+legend {
+	/* margin: 0; */
+	color: inherit;
+}
+
+label {}
+
+input {
+	/* font-size: 99%; */
+	line-height: 1; /* NN7 */
+}
+
+button {
+	/* font-size: 99%; */
+	/* http://www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+	width: auto;
+	overflow: visible;
+}
+
+  input[type='submit']::-moz-focus-inner
+, input[type='button']::-moz-focus-inner
+, button::-moz-focus-inner {
+	padding: 0;
+	border: 0 none;
+}
+
+select {
+	/* font-size: 99%; */
+}
+
+datalist {}
+
+optgroup {}
+
+option {}
+
+textarea {
+	/* font-size: 99%; */
+}
+
+keygen {}
+
+output {}
+
+progress {}
+
+meter {}
+
+input, button, select, textarea {
+	font-size: 99%;
+}
+
+
+/*
+ *= Interactive elements
+ */
+
+details {}
+
+summary {}
+
+command {}
+
+menu {}
+
+
+/*-----------------------------------------------------------------------------
+ *= Size & Margin
+ *-------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset
+{
+	margin: 1em 0;
+}
+
+/*
+ *= Sections
+ */
 
 h1 { font-size: 167%;   /* 22px */ }
 
@@ -140,83 +504,66 @@ h5 { font-size: 116%;   /* 15px */ }
 
 h6 { font-size: 108%;   /* 14px */ }
 
-h1, h2, h3, h4, h5, h6 {
-	font-weight: bolder;
-}
-
 
 /*
  *= Grouping content
  */
 
 hr {
-	/* 表示されてもよいことはあまり無いため */
-	display: none;
+	color: inherit;
+	display: none; /* 表示されてもよいことはあまり無いため */
 }
 
 pre {
 	*width: 100%;
 	overflow: auto;
 	*overflow-y: hidden;
-	white-space: -moz-pre-wrap; /* Fx */
-	white-space: -o-pre-wrap; /* O7 */
-	white-space: -pre-wrap; /* O4-6 */
-	white-space: pre-wrap; /* CSS3 */
 	word-wrap: break-word; /* IE5.5+ */
 	word-break: break-all; /* IE5+ */
 }
 
-pre, code, samp, kbd {
-	font-family: monospace, sans-serif;
+blockquote {
+	/* margin: 1em; */
 }
 
-ol       { list-style-type: decimal; }
-ol ol    { list-style-type: lower-roman; }
-ol ol ol { list-style-type: lower-greek; }
+  ol ol, ol ul, ol dl
+, ul ol, ul ul, ul dl
+, dl ol, dl ul, dl dl {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
-ul       { list-style-type: circle; }
-ul ul    { list-style-type: disc; }
-ul ul ul { list-style-type: square; }
+ol, ul {
+	margin-left: 2em;
+}
 
-li       { list-style-type: inherit; }
+dl dd {
+	margin-left: 1em;
+}
 
-/*
+figure {
+	/* margin: 1em; */
+}
+
 figcaption {
-	font-size: 85%;
+	/* font-size: 85%; /* 11px */
 }
-*/
+
+blockquote /* , figure */ {
+	margin: 1em;
+}
 
 
 /*
  *= Text-level semantics
  */
 
-:link, :visited {
-	text-decoration: none;
-}
-
-em, var, i {
-	font-style: italic;
-}
-
-strong, dfn, b {
-	font-weight: bolder;
-}
-
-small, sub, sup {
-	font-size: smaller;
+:link:hover, :visited:hover {
+	text-decoration: underline;
 }
 
 big {
 	font-size: larger;
-}
-
-q:before {
-	content: open-quote;
-}
-
-q:after {
-	content: close-quote;
 }
 
 abbr, acronym {
@@ -237,26 +584,13 @@ abbr[title], acronym[title], dfn[title] {
 	cursor: inherit;
 }
 
-sub {
-	vertical-align: sub;
-}
-
-sup {
-	vertical-align: super;
-}
-
 
 /*
  *= Edits
  */
 
-del {
-	text-decoration: line-through;
-}
-
 ins {
 	border-bottom: 1px dotted;
-	text-decoration: none;
 }
 
 /*
@@ -264,7 +598,7 @@ ins {
  */
 
   img, iframe, embed, object
-/* , video, audio, canvas */
+/* , video, canvas */
 {
 	vertical-align: bottom;
 	outline: 0 none;
@@ -279,11 +613,6 @@ img {
  *= Tabular data
  */
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
 th {
 	font-weight: bolder;
 }
@@ -293,68 +622,9 @@ table, td, th {
 }
 
 
-/*
- *= Forms
- */
-
-legend {
-	color: inherit;
-}
-
-input {
-	line-height: 1; /* NN7 */
-}
-
-/* http://www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
-button {
-	width: auto;
-	overflow: visible;
-}
-
-  input[type='submit']::-moz-focus-inner
-, input[type='button']::-moz-focus-inner
-, button::-moz-focus-inner {
-	padding: 0;
-	border: 0 none;
-}
-
-
-/*
- *= Margin Setting
- */
-
-h1, h2, h3, h4, h5, h6, p, pre, ol, ul, dl, table, fieldset
-/* , menu */
-{
-	margin: 1em 0;
-}
-
-blockquote, figure {
-	margin: 1em;
-}
-
-  ol ol, ol ul, ol dl /* , ol menu */
-, ul ol, ul ul, ul dl /* , ul menu */
-, dl ol, dl ul, dl dl /* , dl menu */
-/* , menu ol, menu ul, menu dl, menu menu */
-{
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-ol, ul /* , menu */
-{
-	margin-left: 2em;
-}
-
-dl dd {
-	margin-left: 1em;
-}
-
-
-/*
- *= Color Setting
- */
+/*-----------------------------------------------------------------------------
+ *= Color
+ *-------------------------------------------------------------------------- */
 
 body {
 	color: #333;
@@ -435,6 +705,7 @@ input, button, select, textarea {
 	box-shadow: 0 0 8px rgba(85, 170, 238, .5);
 	-moz-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
 	-webkit-box-shadow: 0 0 8px rgba(85, 170, 238, .5);
+	outline: 0 none;
 }
 
 input[type='submit'], input[type='button'], button {
@@ -484,11 +755,11 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 ::selection {}
 */
 
-/*
- *= Common classes
- */
 
-/* For image replacement */
+/*-----------------------------------------------------------------------------
+ *= Common Classes
+ *-------------------------------------------------------------------------- * /
+
 .fir {
 	display: inline-block;
 	overflow: hidden;
@@ -499,7 +770,6 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 	direction: ltr;
 }
 
-/* Clearfix */
 .cfx:before,
 .cfx:after {
 	display: block;
@@ -527,11 +797,10 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 }
 
 
-/*
+/*-----------------------------------------------------------------------------
  *= Screen Styles
- */
+ *-------------------------------------------------------------------------- * /
 
-/*
 @media screen {
 
 	[accesskey]:after {
@@ -548,12 +817,11 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 	}
 
 }
-*/
 
 
-/*
- *= Print styles
- */
+/*-----------------------------------------------------------------------------
+ *= Print Styles
+ *-------------------------------------------------------------------------- * /
 
 @media print {
 
@@ -567,7 +835,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 
 	  [href^='http://']:after, [href^='https://']:after
 	, [href^='ftp://']:after, [href^='ftps://']:after
-	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after */
+	/* [href]:not([href^='.']):not([href^='/']):not([href^='#']):not([href^='mailto:']):after * /
 	{
 		content: '\20\3C' attr(href) '\3E\20';
 		color: #666;
