@@ -562,7 +562,7 @@ blockquote /* , figure */ {
  *= Text-level semantics
  */
 
-:link:hover, :visited:hover {
+:link:hover {
 	text-decoration: underline;
 }
 
@@ -644,7 +644,7 @@ body {
 	color: #551a8b; /* Google Color */
 }
 
-:link:active, :visited:active {
+:link:active {
 	color: #c11; /* Google Color */
 }
 
@@ -861,7 +861,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 		page-break-inside: avoid;
 	}
 
-	:link, :visited {
+	:link {
 		font-weight: bolder;
 		text-decoration: underline;
 	}
