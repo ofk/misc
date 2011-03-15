@@ -2,7 +2,7 @@
  * x.css
  *
  * Author: ofk
- * Version: 2011-03-14
+ * Version: 2011-03-15
  * Reference:
  * - http://www.w3.org/TR/html5/spec.html
  * - http://kojika17.com/2011/03/browsers-default-css.php
@@ -503,6 +503,10 @@ h4 { font-size: 123.1%; /* 16px */ }
 h5 { font-size: 116%;   /* 15px */ }
 
 h6 { font-size: 108%;   /* 14px */ }
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bolder;
+}
 
 
 /*
