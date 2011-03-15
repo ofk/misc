@@ -644,7 +644,7 @@ body {
 	color: #551a8b; /* Google Color */
 }
 
-:link:active {
+:link:active, :visited:active {
 	color: #c11; /* Google Color */
 }
 
@@ -861,7 +861,7 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 		page-break-inside: avoid;
 	}
 
-	:link {
+	:link, :visited {
 		font-weight: bolder;
 		text-decoration: underline;
 	}
