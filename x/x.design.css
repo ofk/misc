@@ -1,0 +1,69 @@
+/*-----------------------------------------------------------------------------
+ * x.design.css
+ *
+ * Author: ofk
+ * Version: 2011-03-20
+ *-------------------------------------------------------------------------- */
+
+body {
+	padding: 8px 32px;
+}
+
+h1, h2 {
+	padding-left: 0.5em;
+	border-left: 0.5em solid #ddd;
+}
+
+h1 {
+	background: #eee;
+}
+
+h2 {
+	border-top: 1px solid #ddd;
+}
+
+h3, h4, h5, h6 {
+	padding-left: 1em;
+	border-bottom: 1px dotted #ddd;
+}
+
+h3 {
+	border-bottom-style: solid;
+}
+
+h1 a:link, h2 a:link, h3 a:link,
+h4 a:link, h5 a:link, h6 a:link,
+h1 a:visited, h2 a:visited, h3 a:visited,
+h4 a:visited, h5 a:visited, h6 a:visited {
+	text-decoration: none;
+}
+
+p {
+	text-indent: 1em;
+}
+
+pre {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+pre.sjisart {
+	border: none;
+	font-family: 'MS PGothic', 'ＭＳ Ｐゴシック';
+	font-size: 16px;
+	line-height: 18px;
+}
+
+dt {
+	font-weight: bolder;
+}
+
+section, .section {
+	margin-bottom: 32px;
+}
+
+footer, .footer {
+	margin-top: 1em;
+	padding-top: 1em;
+	border-top: 1px solid #ddd;
+}
