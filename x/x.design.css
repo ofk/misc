@@ -6,16 +6,12 @@
  *-------------------------------------------------------------------------- */
 
 body {
-	padding: 8px 32px;
+	padding: 0 2.5em;
 }
 
 h1, h2 {
-	padding-left: 0.5em;
-	border-left: 0.5em solid #ddd;
-}
-
-h1 {
-	background: #eee;
+	padding: .25em 1em .25em .5em;
+	border-left: .5em solid #ddd;
 }
 
 h2 {
@@ -23,7 +19,7 @@ h2 {
 }
 
 h3, h4, h5, h6 {
-	padding-left: 1em;
+	padding: .25em 1em;
 	border-bottom: 1px dotted #ddd;
 }
 
@@ -43,12 +39,17 @@ p {
 }
 
 pre {
-	padding: 8px;
+	padding: .25em;
 	border: 1px solid #ddd;
+}
+
+h1, pre {
+	background: #eee;
 }
 
 pre.sjisart {
 	border: none;
+	background: transparent;
 	font-family: 'MS PGothic', 'ＭＳ Ｐゴシック';
 	font-size: 16px;
 	line-height: 18px;
@@ -58,8 +59,12 @@ dt {
 	font-weight: bolder;
 }
 
+th, td {
+	padding: .25em;
+}
+
 section, .section {
-	margin-bottom: 32px;
+	margin-bottom: 2.5em;
 }
 
 footer, .footer {
