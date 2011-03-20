@@ -2,7 +2,7 @@
  * x.css
  *
  * Author: ofk
- * Version: 2011-03-18
+ * Version: 2011-03-20
  * Reference:
  * - http://www.w3.org/TR/html5/spec.html
  * - http://kojika17.com/2011/03/browsers-default-css.php
@@ -224,9 +224,7 @@ div {}
  *= Text-level semantics
  */
 
-a {
-	/* text-decoration: none; */
-}
+a {}
 
 em {
 	/* font-style: italic; */
@@ -321,14 +319,10 @@ small, sub, sup {
  */
 
 ins {
-	/* text-decoration: none; */
+	text-decoration: none;
 }
 
 del {}
-
-a, ins {
-	text-decoration: none;
-}
 
 
 /*
@@ -561,10 +555,6 @@ blockquote /* , figure */ {
 /*
  *= Text-level semantics
  */
-
-:link:hover {
-	text-decoration: underline;
-}
 
 big {
 	font-size: larger;
@@ -863,7 +853,6 @@ input[type='submit']:disabled, input[type='button']:disabled, button:disabled {
 
 	:link, :visited {
 		font-weight: bolder;
-		text-decoration: underline;
 	}
 
 	dl, ol, ul {
