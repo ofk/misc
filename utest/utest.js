@@ -409,6 +409,9 @@ utest.op = {
 	"===": function (v1, v2) {
 		var i, n, t1 = utest.type(v1), t2 = utest.type(v2);
 		if (t1 === t2) {
+			if (t1 === "null" || t1 === "undefined") {
+				return true;
+			}
 			if (typeof v1.equals === "function" && v1.equals === v2.equals) {
 				return v1.equals(v2);
 			}
