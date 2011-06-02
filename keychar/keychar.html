@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>keyChar Tester</title>
+<style type="text/css">
+td { vertical-align: top; }
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="keychar.js"></script>
+<script type="text/javascript">
+$(function () {
+$('input').bind('keydown keypress keyup', function (evt) {
+	$('<li>').text(evt.keyChar() + ' : ' + evt.keyCode).prependTo('#' + evt.type);
+});
+});
+</script>
+</head>
+<body>
+<input />
+<table><tbody>
+<tr>
+<th>keydown</th>
+<th>keypress</th>
+<th>keyup</th>
+</tr>
+<tr>
+<td><ul id="keydown"></ul></td>
+<td><ul id="keypress"></ul></td>
+<td><ul id="keyup"></ul></td>
+</tr>
+</tbody></table>
+</body>
+</html>
