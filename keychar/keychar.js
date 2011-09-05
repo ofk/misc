@@ -1,32 +1,23 @@
+/**
+ * @fileOverview
+ *   キー入力コードを文字列に変換するコードスニペット。
+ * @author <a href="http://0fk.org/">ofk</a>
+ * @version 0.1
+ * @license
+ *   keychar.js (c) 2011 ofk
+ *   Released under the MIT License.
+ */
+
 (function () {
 
 /*
- * keychar.js
- *
- * キー入力コードを文字列に変換する。
- * - getKeyChar(event); // 'a', 'C-a', etc.
- * - evt.keyChar(); // jQueryのみ
- *
- * 手動テスト
+ * 手動テストキー一覧
  * - a, z, 1, 0, f7 （同時押し無し）
  * - shift + 上記キー
  * - ctrl + 上記キー
  * - その他記号キー（+fnキー含む）
  * - numlock
- * - 全角が有効な場合
- *
- * 仕様
- * all:
- * - [brk] => "C-brk"
- * - [fn]+[.] => "del"
- * fx:
- * - [numlk]+[+] => ";"
- * op:
- * - [win] => "["
- * - [@] => "2"
- * - [^] => "6"
- * - [numlk]+[-] => "ins"
- * - [numlk]+[.] => "n"
+ * - 全角が有効な場合の上記キー
  */
 
 var	// ブラウザ判定
@@ -71,10 +62,47 @@ if (const_isop) {
 }
 
 /**
- * イベントからキー文字列（keyChar）を判定する。
+ * イベントのキー入力コードを文字列に変換する。
+ * <ul>
+ * <li>英字キー：a-z</li>
+ * <li>英字キー+SHIFT：A-Z</li>
+ * <li>数字キー（テンキー含む）：0-9</li>
+ * <li>数字キー+SHIFT：該当する記号文字</li>
+ * <li>ファンクションキー：f1-f12</li>
+ * <li>ファンクションキー+SHIFT：F1-F12</li>
+ * <li>記号キー：該当する記号文字</li>
+ * <li>CTRL押しながら：C-a等</li>
+ * <li>ALT押しながら：A-a等</li>
+ * <li>CTRLとALT押しながら：C-A-a等</li>
+ * <li>CTRLとALTとSHIFT押しながら：C-A-A、C-A-S-0等</li>
+ * </ul>
+ * なお、以下の入力の判定の結果は仕様である。
+ * <dl>
+ * <dt>all</dt>
+ * <dd><ul>
+ *   <li>[brk] => "C-brk"</li>
+ *   <li>[fn]+[&#46;] => "del"</li>
+ * </ul></dd>
+ * <dt>fx</dt>
+ * <dd><ul>
+ *   <li>[numlk]+[+] => ";"</li>
+ * </ul></dd>
+ * <dt>op</dt>
+ * <dd><ul>
+ *   <li>[win] => "["</li>
+ *   <li>[@] => "2"</li>
+ *   <li>[^] => "6"</li>
+ *   <li>[numlk]+[-] => "ins"</li>
+ *   <li>[numlk]+[&#46;] => "n"</li>
+ * </ul></dd>
+ * </dl>
  *
- * @param {Event} evt イベントオブジェクト。type、keyCode、charCode、whichを参照している。
- * @return {String} キー文字列。ｌ
+ * @example
+ * getKeyChar(event); // 'a', 'C-a', etc.
+ *
+ * @function
+ * @param {Event} evt イベントオブジェクト。type、keyCode、charCode、whichを参照。
+ * @return {String} 判定したキー入力文字列。
  */
 this.getKeyChar = getKeyChar;
 function getKeyChar(evt) {
@@ -178,6 +206,9 @@ if (this.jQuery) {
 
 	/**
 	 * キー文字列の取得。
+	 *
+	 * @example
+	 * $(window).keydown(function (evt) { alert(evt.keyChar()); });
 	 *
 	 * @methodOf jQuery.Event#
 	 * @name keyChar
