@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+<script type="text/javascript" src="$.boost.js"></script>
+<script type="text/javascript" src="$.js"></script>
+<script type="text/javascript">
+$(function () {
+	var dispval = $("#dispval");
+	function dispvals() {
+		dispval.find("p").html(
+			"<b>Single:</b> " + $("#single").val() +
+			" <b>Multiple:</b> " + ($("#multiple").val() || []).join(", ")
+		);
+	}
+	dispval.find("select").on("change", dispvals);
+	dispvals();
+	$("#disphtml p:empty").html("クリックすると<em>HTML</em>を表示するよ！")
+	$("#disphtml p").on("click", function () {
+		alert($(this).html())
+	});
+	function runA() {
+		function cnt() {
+			$(this).text($(this).queue().length);
+		}
+		$("#animate").css("overflow", "hidden")
+			.animate({ width: 40, height: 40, backgroundColor: "#ff0000" }, cnt)
+			.animate({ left: "+=200", backgroundColor: "#00ff00" }, 2000, cnt)
+			.animate({ height: 0, backgroundColor: "#0000ff" }, 1000, cnt)
+			.animate({ height: 40, backgroundColor: "#ff00ff" }, "fast", cnt)
+			.animate({ left: "-=200", backgroundColor: "#ffff00" }, 1500, cnt)
+			.animate({ width: 0, height: 0, backgroundColor: "#ffffff" }, "slow", cnt)
+			.animate({ width: 40, height: 40, backgroundColor: "#00ffff" }, 1200, cnt)
+			.animate({ width: 40, height: 0, backgroundColor: "black" }, "normal", runA);
+	}
+	runA();
+});
+</script>
+</head>
+<body>
+
+<div id="dispval">
+<p></p>
+<select id="single">
+  <option>Single</option>
+  <option>Single2</option>
+</select>
+<select id="multiple" multiple="multiple">
+  <option selected="selected">Multiple</option>
+  <option>Multiple2</option>
+  <option selected="selected">Multiple3</option>
+</select>
+</div>
+
+<div id="disphtml">
+<p><b>クリック</b>すると<span id="tag">HTML</span>を表示するよ</p>
+<p>この<button name="nada">ボタン</button>は飾りです</p>
+<p></p>
+</div>
+
+<div id="dispanimate" style="position:relative;height:100px;">
+	<div id="animate" style="position:absolute;top:0;left:0;width:0;height:0;background:black;"></div>
+</div>
+
+
+</body>
+</html>

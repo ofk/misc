@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.boost test</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<!--script type="text/javascript" src="../$.js"></script-->
+</head>
+<body></body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+
+utest("Object", {
+	"#hasOwnProperty('toString')": function () {
+		return !Object.hasOwnProperty('toString');
+	},
+	"#hasOwnProperty('foobar')": function () {
+		return !Object.hasOwnProperty('foobar');
+	},
+	"#hasOwnProperty.call({},'toString')": function () {
+		return !Object.hasOwnProperty.call({},'toString');
+	},
+	"#hasOwnProperty.call({},'foobar')": function () {
+		return !Object.hasOwnProperty.call({},'foobar');
+	},
+	"#hasOwnProperty.call({foobar:1,toString:1},'toString')": function () {
+		return Object.hasOwnProperty.call({foobar:1,toString:1},'toString');
+	},
+	"#hasOwnProperty.call({foobar:1,toString:1},'foobar')": function () {
+		return Object.hasOwnProperty.call({foobar:1,toString:1},'foobar');
+	}
+});
+
+function A(s) {
+	return s.split(" ")
+}
+
+utest("Array.prototype", {
+	"#pop()": function () {
+		var arr = A('a b c');
+		return [ [arr.pop(),"===",'c'], [arr,"===",A('a b')] ];
+	},
+	"#pop() - empty": function () {
+		var arr = [];
+		return [ [arr.pop(),"===",void 0], [arr,"===",[]] ];
+	},
+	"#push": function () {
+		var arr = A('a b');
+		return [ [arr.push('c','d'),"===",4], [arr,"===",A('a b c d')] ];
+	},
+	"#push - empty": function () {
+		var arr = A('a b');
+		return [ [arr.push(),"===",2], [arr,"===",A('a b')] ];
+	},
+	"#push.apply": function () {
+		var obj = { '0':'a','1':'b',length:2 };
+		return [
+			[Array.prototype.push.apply(obj,['c','d']),"===",4],
+			[obj.length,"===",4],
+			[obj[0],"===",'a'],
+			[obj[1],"===",'b'],
+			[obj[2],"===",'c'],
+			[obj[3],"===",'d']
+		];
+	},
+	"#shift": function () {
+		var arr = A('a b c');
+		return [ [arr.shift(),"===",'a'], [arr,"===",A('b c')] ];
+	},
+	"#shift - empty": function () {
+		var arr = [];
+		return [ [arr.shift(),"===",void 0], [arr.length,"===",0] ];
+	},
+	"#unshift": function () {
+		var arr = A('a b');
+		return [ [arr.unshift('c','d'),"===",4], [arr.join('|'),"===",'c|d|a|b'] ];
+	},
+	"#unshift - empty": function () {
+		var arr = A('a b');
+		return [ [arr.unshift(),"===",2], [arr.join('|'),"===",'a|b'] ];
+	},
+	"#splice(x, y)": function () {
+		var arr = A('a b c d e f');
+		return [
+			[arr.splice(3,2),"===",A('d e')],
+			[arr,"===",A('a b c f')] ];
+	},
+	"#splice(x, 2, arr1, arr2, arr3)": function () {
+		var arr = A('a b c d e f');
+		return [
+			[arr.splice(3,2,'x','y','z'),"===",A('d e')],
+			[arr,"===",A('a b c x y z f')]
+		];
+	},
+	"#splice(x, 2, arr1, arr2)": function () {
+		var arr = A('a b c d e f');
+		return [
+			[arr.splice(3,2,'x','y'),"===",A('d e')],
+			[arr,"===",A('a b c x y f')]
+		];
+	},
+	"#slice.call(me)": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.call(arguments),"===",A('a b c d e')]
+			];
+		})('a','b','c','d','e');
+	},
+	"#slice.call(me, 1)": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.call(arguments, 1),"===",A('b c d e')]
+			];
+		})('a','b','c','d','e');
+	},
+	"#slice.call(me, 1, 3)": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.call(arguments, 1, 3),"===",A('b c')]
+			];
+		})('a','b','c','d','e');
+	},
+	"#slice.apply(me)": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.apply(arguments),"===",A('a b c d e')]
+			];
+		})('a','b','c','d','e');
+	},
+	"#slice.apply(me, [1])": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.apply(arguments, [1]),"===",A('b c d e')]
+			];
+		})('a','b','c','d','e');
+	},
+	"#slice.apply(me, [1, 3])": function () {
+		return (function () {
+			return [
+				[Array.prototype.slice.apply(arguments, [1, 3]),"===",A('b c')]
+			];
+		})('a','b','c','d','e');
+	}
+});
+
+utest("String.prototype", {
+	"#replace(/([A-Z])/, '[$1]')": function () {
+		return [ ['aBcDeFAbCdEf'.replace(/([A-Z])/, '[$1]'),"===",'a[B]cDeFAbCdEf'] ];
+	},
+	"#replace(/([A-Z])/g, '[$1]')": function () {
+		return [ ['aBcDeFAbCdEf'.replace(/([A-Z])/g, '[$1]'),"===",'a[B]c[D]e[F][A]b[C]d[E]f'] ];
+	},
+	"#replace('A', '[$1]')": function () {
+		return [ ['aBcDeFAbCdEf'.replace('A', '[$1]'),"===",'aBcDeF[$1]bCdEf'] ];
+	},
+	"#replace('A', function)": function () {
+		return [ ['aBcDeFAbCdEf'.replace('A', function (x, y, z) {
+			return '['+x+'|'+y+'|'+z+']';
+		}),"===",'aBcDeF[A|6|aBcDeFAbCdEf]bCdEf'] ];
+	},
+	"#replace(/([A-Z])/, function)": function () {
+		return [ ['aBcDeFAbCdEf'.replace(/([A-Z])/, function ($0, $1) {
+			return '[' + $1.toLowerCase() + ']';
+		}),"===",'a[b]cDeFAbCdEf'] ];
+	},
+	"#replace(/([A-Z])/g, function)": function () {
+		return [ ['aBcDeFAbCdEf'.replace(/([A-Z])/g, function ($0, $1) {
+			return '[' + $1.toLowerCase() + ']';
+		}),"===",'a[b]c[d]e[f][a]b[c]d[e]f'] ];
+	},
+	"#replace(/([a-z])([A-Z])([a-z])/, function)": function () {
+		return [ ['aBcDeFAbCdEf'.replace(/([a-z])([A-Z])([a-z])/, function ($0, $1, $2, $3, idx, all) {
+			return '['+$0+"|"+$1+"|"+$2+"|"+$3+"|"+idx+"|"+all+']';
+		}),"===",'[aBc|a|B|c|0|aBcDeFAbCdEf]DeFAbCdEf'] ];
+	},
+	"#replace(/([a-z])([A-Z])([a-z])/g, function)": function () {
+		return [ ['aBcDeFAbCdEfaBcDeFAbCdEf'.replace(/([a-z])([A-Z])([a-z])/g, function ($0, $1, $2, $3, idx, all) {
+			return '['+$0+"|"+$1+"|"+$2+"|"+$3+"|"+idx+"|"+all+']';
+		}),"===",'[aBc|a|B|c|0|aBcDeFAbCdEfaBcDeFAbCdEf]DeFA[bCd|b|C|d|7|aBcDeFAbCdEfaBcDeFAbCdEf]Ef[aBc|a|B|c|12|aBcDeFAbCdEfaBcDeFAbCdEf]DeFA[bCd|b|C|d|19|aBcDeFAbCdEfaBcDeFAbCdEf]Ef'] ];
+	}
+});
+
+utest("Function.prototype", {
+	"#call(me,1)": function () {
+		return [ [(function (a1) {
+			return this.nodeType + a1;
+		}).call(document.body, 1),"===",2] ];
+	},
+	"#call(me,1,2,3,4,5)": function () {
+		return [ [(function (a1,a2,a3,a4,a5) {
+			return this.nodeType+a1+a2+a3+a4+a5;
+		}).call(document.body,1,2,3,4,5),"===",16] ];
+	},
+	"#call(Number,1)": function () {
+		return [ [(function (a1) {
+			return this+a1;
+		}).call(10, 1),"===",11] ];
+	},
+	"#call(Number,1,2,3,4,5)": function () {
+		return [ [(function (a1,a2,a3,a4,a5) {
+			return this+a1+a2+a3+a4+a5;
+		}).call(10,1,2,3,4,5),"===",25] ];
+	}
+});
+
+utest("encode*, decode*", {
+	encodeURI: function () {
+		return [ [encodeURI(";/?:@&=+$%-_!~*{}[].,()”\u3042a^# \u2018"),"===",";/?:@&=+$%25-_!~*%7B%7D%5B%5D.,()%E2%80%9D%E3%81%82a%5E#%20%E2%80%98"] ];
+	},
+	encodeURIComponent: function () {
+		return [ [encodeURIComponent(";/?:@&=+$%-_!~*{}[].,()”\u3042a^# \u2018"),"===","%3B%2F%3F%3A%40%26%3D%2B%24%25-_!~*%7B%7D%5B%5D.%2C()%E2%80%9D%E3%81%82a%5E%23%20%E2%80%98"] ];
+	},
+	decodeURI: function () {
+		return [ [";/?:@&=+$%-_!~*{}[].,()”\u3042a^# \u2018","===",decodeURI(";/?:@&=+$%25-_!~*%7B%7D%5B%5D.,()%E2%80%9D%E3%81%82a%5E#%20%E2%80%98")] ];
+	},
+	decodeURIComponent: function () {
+		return [ [";/?:@&=+$%-_!~*{}[].,()”\u3042a^# \u2018","===",decodeURIComponent("%3B%2F%3F%3A%40%26%3D%2B%24%25-_!~*%7B%7D%5B%5D.%2C()%E2%80%9D%E3%81%82a%5E%23%20%E2%80%98")] ];
+	}
+});
+
+</script>
+</html>

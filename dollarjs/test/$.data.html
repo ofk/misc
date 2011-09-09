@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.data</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<script type="text/javascript" src="../$.js"></script>
+</head>
+<body></body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+var win_uid, doc_uid, body_uid, body = document.body;
+utest("$.data", {
+	"$.data()": function () {
+		return !$.data();
+	},
+	"$.data(window)": function () {
+		win_uid = $.data(window);
+		return !!win_uid;
+	},
+	"$.data(document)": function () {
+		doc_uid = $.data(document);
+		return !!doc_uid;
+	},
+	"$.data(body)": function () {
+		body_uid = $.data(body);
+		return !!body_uid;
+	},
+	"$.data(window)===-1": function () {
+		return [ [$.data(window),"===",-1] ];
+	},
+	"$.data(document)===document.$uid": function () {
+		return [ [$.data(document),"===",document.$uid] ];
+	},
+	"$.data(body)===body.uniqueID": function () {
+		return [ [$.data(body),"===",body.uniqueID] ];
+	},
+	"$.data(window)===win_uid": function () {
+		return [
+			[$.data(window),"===",win_uid],
+			[$.data(window),"!==",doc_uid],
+			[$.data(window),"!==",body_uid]
+		];
+	},
+	"$.data(document)===doc_uid": function () {
+		return [
+			[$.data(document),"!==",win_uid],
+			[$.data(document),"===",doc_uid],
+			[$.data(document),"!==",body_uid]
+		];
+	},
+	"$.data(body)===body_uid": function () {
+		return [
+			[$.data(body),"!==",win_uid],
+			[$.data(body),"!==",doc_uid],
+			[$.data(body),"===",body_uid]
+		];
+	},
+	"!$.data(window,'foo')": function () {
+		return !$.data(window,'foo');
+	},
+	"$.data(window,'foo','hogeW')": function () {
+		return [[$.data(window,'foo','hogeW'),'===','hogeW']];
+	},
+	"$.data(window,'foo')": function () {
+		return [[$.data(window,'foo'),'===','hogeW']];
+	},
+	"!$.data(window,'bar')": function () {
+		return !$.data(window,'bar');
+	},
+	"$.data(window,'bar','piyoW')": function () {
+		return [[$.data(window,'bar','piyoW'),'===','piyoW']];
+	},
+	"$.data(window,'bar')": function () {
+		return [[$.data(window,'bar'),'===','piyoW']];
+	},
+	"!$.data(document,'foo')": function () {
+		return !$.data(document,'foo');
+	},
+	"$.data(document,'foo','hogeD')": function () {
+		return [[$.data(document,'foo','hogeD'),'===','hogeD']];
+	},
+	"$.data(document,'foo')": function () {
+		return [[$.data(document,'foo'),'===','hogeD']];
+	},
+	"!$.data(document,'bar')": function () {
+		return !$.data(document,'bar');
+	},
+	"$.data(document,'bar','piyoD')": function () {
+		return [[$.data(document,'bar','piyoD'),'===','piyoD']];
+	},
+	"$.data(document,'bar')": function () {
+		return [[$.data(document,'bar'),'===','piyoD']];
+	},
+	"!$.data(body,'foo')": function () {
+		return !$.data(body,'foo');
+	},
+	"$.data(body,'foo','hogeB')": function () {
+		return [[$.data(body,'foo','hogeB'),'===','hogeB']];
+	},
+	"$.data(body,'foo')": function () {
+		return [[$.data(body,'foo'),'===','hogeB']];
+	},
+	"!$.data(body,'bar')": function () {
+		return !$.data(body,'bar');
+	},
+	"$.data(body,'bar','piyoB')": function () {
+		return [[$.data(body,'bar','piyoB'),'===','piyoB']];
+	},
+	"$.data(body,'bar')": function () {
+		return [[$.data(body,'bar'),'===','piyoB']];
+	}
+});
+utest("$.data.remove", {
+	"$.data.remove()": function () {
+		return !$.data.remove();
+	},
+	"$.data.remove(body,'foo')": function () {
+		$.data.remove(body,'foo');
+		return !$.data(body,'foo');
+	},
+	"$.data(body,'foo','hugaB')": function () {
+		$.data(body,'foo','hugaB');
+		return [[$.data(body,'foo'),'===','hugaB']];
+	},
+	"$.data.remove(body)": function () {
+		$.data.remove(body,'foo');
+		$.data.remove(body,'bar');
+		return !$_cache[body_uid];
+	},
+	"$.data.remove(window)": function () {
+		$.data.remove(window);
+		return !$_cache[win_uid];
+	}
+});
+$.data.remove(document,'foo');
+$.data.remove(document,'bar');
+function f1(v){ return v+1 }
+function f2(v){ return v+2 }
+function f3(v){ return v+3 }
+function f4(v){ return v+4 }
+function f5(v){ return v+5 }
+utest("$.data.queue", {
+	"$.data.queue()": function () {
+		return !$.data.queue();
+	},
+	"$.data.queue(body,'test')": function () {
+		return [[ $.data.queue(body,'test'),'===',[] ]];
+	},
+	"$.data.queue(body,'test',f1)": function () {
+		return [[ $.data.queue(body,'test',f1),'===',[f1] ]];
+	},
+	"$.data.queue(body,'test',f2)": function () {
+		return [[ $.data.queue(body,'test',f2),'===',[f1,f2] ]];
+	},
+	"$.data.queue(body,'test',f2) - 2": function () {
+		return [[ $.data.queue(body,'test',f2),'===',[f1,f2,f2] ]];
+	},
+	"$.data.queue(body,'test',[f3,f4])": function () {
+		return [[ $.data.queue(body,'test',[f3,f4]),'===',[f3,f4] ]];
+	},
+	"$.data.queue(body,'test',f5)": function () {
+		return [[ $.data.queue(body,'test',f5),'===',[f3,f4,f5] ]];
+	},
+	"$.data.queue(body,'test') - 2": function () {
+		return [[ $.data.queue(body,'test'),'===',[f3,f4,f5] ]];
+	}
+});
+var test1, test2, test3, test4, test5;
+function ft1(next) { test1(next); };
+function ft2(next) { test2(next); };
+function ft3(next) { test3(next); };
+function ft4(next) { test4(next); };
+function ft5(next) { test5(next); };
+utest("$.data.dequeue", {
+	"$.data.dequeue()": function () {
+		return !$.data.dequeue();
+	},
+	"$.data.dequeue(body,'foo')": function () {
+		$.data.dequeue(body,'foo');
+		return [[ $.data.queue(body,'foo'),'===',[] ]];
+	},
+	"$.data.dequeue(body,'test')": function () {
+		$.data.dequeue(body,'test');
+		return [[ $.data.queue(body,'test'),'===',[f4,f5] ]];
+	},
+	"$.data.dequeue(body,'test',[ft1,ft2,ft3,ft4,ft5])": function () {
+		$.data.queue(body,'test',[ft1,ft2,ft3,ft4,ft5]);
+		return [[ $.data.queue(body,'test'),'===',[ft1,ft2,ft3,ft4,ft5] ]];
+	},
+	"$.data.dequeue(body,'test') - 1": function (test) {
+		test1 = function () { test(true) };
+		$.data.dequeue(body,'test');
+	},
+	"$.data.dequeue(body,'test') - 2,3,4": function (test) {
+		var result = [false,false,false];
+		test2 = function (next) {
+			result[0] = [ $.data.queue(body,'test').length,'===',4 ];
+			next();
+		};
+		test3 = function (next) {
+			result[1] = [ $.data.queue(body,'test').length,'===',3 ];
+			next();
+		};
+		test4 = function (next) {
+			result[2] = [ $.data.queue(body,'test').length,'===',2 ];
+			test(result);
+		};
+		$.data.dequeue(body,'test');
+	},
+	"$.data.dequeue(body,'test') - 5": function (test) {
+		var result = [false,false];
+		test5 = function (next) {
+			result[0] = [ $.data.queue(body,'test').length,'===',1 ];
+			next();
+			result[1] = [ $.data.queue(body,'test').length,'===',0 ];
+			test(result);
+		};
+		$.data.dequeue(body,'test');
+	}
+});
+</script>
+</html>

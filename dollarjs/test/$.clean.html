@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.clean</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<script type="text/javascript" src="../$.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<code>A</code><code>B</code><code>C</code>
+</body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+var box = document.getElementById("box");
+function add(nodes) {
+	for (var i = 0, iz = nodes.length; i < iz; ++i)
+		box.appendChild(nodes[i]);
+}
+utest("$.clean", {
+	"$.clean([])": function () {
+		return [[ $.clean([]).length,'===',0 ]];
+	},
+	"$.clean([123,false,0,'','abc',' '])": function () {
+		var nodes = $.clean([123,false,0,'','abc',' ']);
+		add(nodes);
+		return [
+			[ nodes.length,'===',4 ],
+			[ nodes[0].nodeValue,'===','123' ],
+			[ nodes[1].nodeValue,'===','0' ],
+			[ nodes[2].nodeValue,'===','abc' ],
+			[ nodes[3].nodeValue,'===',' ' ]
+		];
+	},
+	"$.clean(['<b>','<img/>','<span></span>'])": function () {
+		var nodes = $.clean(['<b>','<img/>','<span></span>']);
+		add(nodes);
+		return [
+			[ nodes.length,'===',3 ],
+			[ nodes[0].tagName,'===','B' ],
+			[ nodes[1].tagName,'===','IMG' ],
+			[ nodes[2].tagName,'===','SPAN' ]
+		];
+	},
+	"$.clean(['<p>','<br/>','<iframe></iframe>'])": function () {
+		var nodes = $.clean(['<p id=test>','<br clear=all/>','<iframe src="data/iframe.html" height="200" width="200"></iframe>']);
+		add(nodes);
+		return [
+			[ nodes.length,'===',3 ],
+			[ nodes[0].tagName,'===','P' ],
+			[ nodes[1].tagName,'===','BR' ],
+			[ nodes[2].tagName,'===','IFRAME' ]
+		];
+	},
+	"$.clean(['&copy;','<=>'])": function () {
+		var nodes = $.clean(['&copy;','<=>']);
+		add(nodes);
+		return [
+			[ nodes.length,'===',2 ],
+			[ nodes[0].nodeValue.charCodeAt(0),'===',169 ],
+			[ nodes[1].nodeValue,'===','<=>' ]
+		];
+	},
+	"$.clean(['a<i>b</i>c', ' <s>s</s> '])": function () {
+		var nodes = $.clean(['a<i>b</i>c', ' <s>s</s> ']);
+		add(nodes);
+		return [
+			[ nodes.length,'===',6 ],
+			[ nodes[0].nodeValue,'===','a' ],
+			[ nodes[1].tagName,'===','I' ],
+			[ nodes[1].firstChild.nodeValue,'===','b' ],
+			[ nodes[2].nodeValue,'===','c' ],
+			[ nodes[3].nodeValue,'===',' ' ],
+			[ nodes[4].tagName,'===','S' ],
+			[ nodes[4].firstChild.nodeValue,'===','s' ],
+			[ nodes[5].nodeValue,'===',' ' ]
+		];
+	},
+	"$.clean(['<option>','<legend>','<caption>','<tr><td>','<td>','<col>'])": function () {
+		var nodes = $.clean(['<option>foo</option>', '<legend>bar</legend>', '<caption>baz</caption>', '<tr><td>qux</td></tr>', '<td>hoge</td>', '<col span="2" width="100">']);
+		//add(nodes);
+		return [
+			[ nodes.length,'===',6 ],
+			[ nodes[0].tagName,'===','OPTION' ],
+			[ nodes[1].tagName,'===','LEGEND' ],
+			[ nodes[2].tagName,'===','CAPTION' ],
+			[ nodes[3].tagName,'===','TR' ],
+			[ nodes[4].tagName,'===','TD' ],
+			[ nodes[5].tagName,'===','COL' ]
+		];
+	},
+	"$.clean(['<p>a</p><div>b</div>'])": function () {
+		var nodes = $.clean(['<p>a</p><div>b</div>']);
+		return [
+			[ nodes.length,'===',2 ],
+			[ nodes[0].tagName,'===','P' ],
+			[ nodes[0].firstChild.nodeValue,'===','a' ],
+			[ nodes[1].tagName,'===','DIV' ],
+			[ nodes[1].firstChild.nodeValue,'===','b' ]
+		];
+	},
+	"$.clean(['<table>'])": function () {
+		var nodes = $.clean([
+			'<table><tr><td>A</td></tr></table>',
+			'<table><tbody><tr><td>B</td></tr></tbody></table>',
+			'<thead><tr><th>C</th></tr></thead><tfoot><tr><th>D</th></tr></tfoot>',
+			'<thead><tr><th>E</th></tr></thead><tbody><tr><th>F</th></tr></tbody><tfoot><tr><th>G</th></tr></tfoot>'
+		]);
+		function chk(reg, node) {
+			return reg.test(node.innerHTML.replace(/\s+/g,""));
+		}
+		return [
+			[ nodes.length,'===',7 ],
+			[ nodes[0].tagName,'===','TABLE' ],
+			chk(/<tr><td>A<\/td><\/tr>/i, nodes[0]),
+			[ nodes[1].tagName,'===','TABLE' ],
+			chk(/<tbody><tr><td>B<\/td><\/tr><\/tbody>/i, nodes[1]),
+			[ nodes[2].tagName,'===','THEAD' ],
+			chk(/<tr><th>C<\/th><\/tr>/i, nodes[2]),
+			[ nodes[3].tagName,'===','TFOOT' ],
+			chk(/<tr><th>D<\/th><\/tr>/i, nodes[3]),
+			[ nodes[4].tagName,'===','THEAD' ],
+			chk(/<tr><th>E<\/th><\/tr>/i, nodes[4]),
+			[ nodes[5].tagName,'===','TBODY' ],
+			chk(/<tr><th>F<\/th><\/tr>/i, nodes[5]),
+			[ nodes[6].tagName,'===','TFOOT' ],
+			chk(/<tr><th>G<\/th><\/tr>/i, nodes[6])
+		];
+	},
+	"$.clean([Node,Node,Node,Node[],String[],String[][]])": function () {
+		var nodes = {length:0};
+		$.clean([
+			document.body,
+			document.createElement("div"),
+			document.createTextNode("str"),
+			document.getElementsByTagName("code"),
+			[ "<b>", "c" ],
+			[ ["<dfn>", "g"], ["<hr>"] ]
+		], null, nodes);
+		return [
+			[ nodes.length,'===',11 ],
+			[ nodes[0].tagName,'===','BODY' ],
+			[ nodes[1].tagName,'===','DIV' ],
+			[ nodes[2].nodeValue,'===','str' ],
+			[ nodes[3].tagName,'===','CODE' ],
+			[ nodes[4].tagName,'===','CODE' ],
+			[ nodes[5].tagName,'===','CODE' ],
+			[ nodes[6].tagName,'===','B' ],
+			[ nodes[7].nodeValue,'===','c' ],
+			[ nodes[8].tagName,'===','DFN' ],
+			[ nodes[9].nodeValue,'===','g' ],
+			[ nodes[10].tagName,'===','HR' ]
+		];
+	}
+});
+</script>
+</html>

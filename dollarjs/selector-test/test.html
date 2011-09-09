@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Selectors testsuite - CSS3 . info</title>
+  </head>
+  <body>
+    <div id="document">
+      <div id="header">
+        <h3><a href="http://www.css3.info">CSS3.info</a></h3>
+        <h4>Everything <em>you</em> need to know about CSS3</h4>
+      </div>
+      <ul id="menu">
+        <li><a href='http://www.css3.info/'>Home</a></li>
+        <li><a href='http://www.css3.info/preview/'>CSS3 Preview</a></li>
+        <li><a href='http://www.css3.info/modules/'>Module status</a></li>
+        <li id='active'><a href='http://www.css3.info/selectors-test/'>CSS Selectors Test</a></li>
+        <li><a href='http://www.css3.info/about/'>About Us</a></li>
+        <li><a href='http://www.css3.info/contact/'>Contact</a></li>
+      </ul>
+      <div id="content">
+        <div id="breadcrumbs"><a href="http://www.css3.info/">CSS3 . Info</a> / <a href="http://www.css3.info/selectors-test/">selectors test</a> / CSS Selectors testsuite</div>
+<script type="text/javascript" src="csstest.js"></script>
+<script type='text/javascript'>
+function boot() {
+  var e = document.getElementById("results");
+  if (e.childNodes.length == 0) {
+    new CSSTestCase([
+      'any', 'element', 'class', 'id', 'descendant' , 'child', 'adjacent', 'attribute-present', 
+      'attribute-equal', 'attribute-space', 'attribute-hyphen', 'firstchild',
+      'link', 'visited',  'lang',
+      'contains',
+      'before', 'after', 'firstletter', 'firstline', 
+      'attribute-begin', 'attribute-end', 'attribute-contains', 'combine', 
+      'root', 'lastchild', 'onlychild', 'nthchild', 'nthlastchild', 'firsttype', 'lasttype', 'onlytype', 
+      'nthtype', 'nthlasttype', 'empty',
+      'firstletter3', 'firstline3', 'before3','after3',  'not',
+      'enabled', 'disabled', 'checked', 'target'
+    ], {
+      onSuccess: function(test, total) {
+        if (test.testsPassed == test.testsTotal) {
+          document.getElementById("results").appendChild(
+            Builder.node('li', { className: 'passed' }, [
+              Builder.node('a', { href: 'test-' + test.id + '.html#' + test.id }, [ test.title ])              
+            ])
+          );
+        } else {
+          document.getElementById("results").appendChild(
+            Builder.node('li', { className: 'buggy' }, [
+              Builder.node('a', { href: 'test-' + test.id + '.html#' + test.id }, [ test.title, 
+                Builder.node('span', [
+                  '(' + (test.testsTotal - test.testsPassed) + ' out of ' + test.testsTotal + ' failed)'
+                ])
+              ])              
+            ])
+          );
+        }
+        
+        document.getElementById("status").innerHTML =
+          'From the ' +  total.totalSelectors + ' selectors ' +  total.passedSelectors + ' have passed, ' + 
+          total.buggySelectors + ' are buggy and ' +  total.failedSelectors + ' are unsupported ' + 
+          '(Passed ' + total.passedTests + ' out of ' + total.totalTests + ' tests)';
+      },
+      
+      onFailure: function(test, total) {
+        document.getElementById("results").appendChild(
+          Builder.node('li', { className: 'failed' }, [
+            Builder.node('a', { href: 'test-' + test.id + '.html#' + test.id }, [ test.title, 
+              Builder.node('span', [
+                 '(' + (test.testsTotal - test.testsPassed) + ' out of ' + test.testsTotal + ' failed)'
+               ])
+            ])              
+          ])
+        );
+
+        document.getElementById("status").innerHTML =
+          'From the ' +  total.totalSelectors + ' selectors ' +  total.passedSelectors + ' have passed, ' + 
+          total.buggySelectors + ' are buggy and ' +  total.failedSelectors + ' are unsupported ' + 
+          '(Passed ' + total.passedTests + ' out of ' + total.totalTests + ' tests)';
+      }
+    });
+  }
+}
+
+window.onload = boot;
+
+</script>
+
+    <style type='text/css'>
+      #content ul {
+        list-style-type: none;
+        margin: 2em 0 0 10px;
+        padding: 0;
+      }
+      #content ul li {
+        padding: 0.4em;
+        margin: 0 0 0.3em;
+        font-size: 0.9em;
+      }
+      .passed { 
+        background-color: #090; 
+        color: #fff; 
+      }
+      .failed { 
+        background-color: #900; 
+        color: #fff; 
+      }
+      .buggy {
+        background-color: #f60;
+        color: #fff;
+      }
+      span {
+        margin: 0 0 0 3em;
+        font-size: 0.8em;
+      }    
+      ul#results li a { 
+        color: #fff; 
+        text-decoration: none;
+      }  
+    </style>
+
+    <h1>CSS Selectors</h1>
+    <h2>Is your browser compatible?</h2>
+
+    <p id='status'></p>
+    <ul id='results'></ul>
+    <br/>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>functions</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<script type="text/javascript" src="../$.js"></script>
+</head>
+<body>
+<div id="testhtml" style="display:none">
+	<iframe id="ifr" src="data/iframe.html" onload="ifr_loaded=1"></iframe>
+	<div id="testhtml1">
+		<span>a<span>a</span></span>
+		<code>1</code><!--comment-->
+	</div>
+	<span>b</span>
+	<code>2</code><!--comment-->
+	<div id="testhtml2">
+		<span>c<span>c</span></span>
+		<code>3</code><!--comment-->
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+
+function run() {
+var test0 = document.getElementById("testhtml"),
+    test1 = document.getElementById("testhtml1"),
+    test2 = document.getElementById("testhtml2");
+
+var ifr = document.getElementById("ifr"),
+    ifrwin = ifr.contentWindow || document.frames.ifr,
+    ifrdoc = ifrwin.document;
+
+/*
+utest("$.isFunction", {
+	"$.isFunction()": function () {
+		return !$.isFunction();
+	},
+	"$.isFunction(null)": function () {
+		return !$.isFunction(null);
+	},
+	"$.isFunction(void 0)": function () {
+		return !$.isFunction(void 0);
+	},
+	"$.isFunction('')": function () {
+		return !$.isFunction('');
+	},
+	"$.isFunction(0)": function () {
+		return !$.isFunction(0);
+	},
+	"$.isFunction(String)": function () {
+		return $.isFunction(String);
+	},
+	"$.isFunction(Array)": function () {
+		return $.isFunction(Array);
+	},
+	"$.isFunction(Object)": function () {
+		return $.isFunction(Object);
+	},
+	"$.isFunction(Function)": function () {
+		return $.isFunction(Function);
+	},
+	"$.isFunction('function(){}')": function () {
+		return !$.isFunction('function(){}');
+	},
+	"$.isFunction([function(){}])": function () {
+		return !$.isFunction([function(){}]);
+	},
+	"$.isFunction({'function(){}':function(){}})": function () {
+		return !$.isFunction({'function(){}':function(){}});
+	},
+	"$.isFunction({'function(){}':function(){}})": function () {
+		return !$.isFunction({'function(){}':function(){}});
+	},
+	"$.isFunction({'function(){}':function(){}})": function () {
+		return !$.isFunction({'function(){}':function(){}});
+	},
+	"$.isFunction(function(){})": function () {
+		return $.isFunction(function(){});
+	},
+	"$.isFunction(DOMElement)": function () {
+		return !$.isFunction(document.body);
+	},
+	"$.isFunction(DOMElement#getAttribute)": function () {
+		return $.isFunction(document.body.getAttribute);
+	},
+	"$.isFunction(Collection)": function () {
+		return !$.isFunction(document.body.childNodes);
+	},
+	"$.isFunction(DOMElement#focus)": function () {
+		return $.isFunction(document.createElement("input").focus);
+	},
+	"$.isFunction(Recursive Function)": function (test) {
+		function callme(callback){
+			function fn(response){
+				callback(response);
+			}
+			test($.isFunction(fn));
+			fn({ some: "data" });
+		};
+		callme(function(){
+			callme(function(){});
+		});
+	}
+});
+*/
+
+utest("getTags", {
+	"getTags('code',[test0])": function () {
+		return [[ getTags('code',[test0]).length,"===",3 ]];
+	},
+	"getTags('code',[test1])": function () {
+		return [[ getTags('code',[test1]).length,"===",1 ]];
+	},
+	"getTags('code',[test1,test2])": function () {
+		return [[ getTags('code',[test1,test2]).length,"===",2 ]];
+	},
+	"getTags('code',[test0,test1,test2])": function () {
+		return [[ getTags('code',[test0,test1,test2]).length,"===",3 ]];
+	},
+	"getTags('span',[test0])": function () {
+		return [[ getTags('span',[test0]).length,"===",5 ]];
+	},
+	"getTags('span',[test1])": function () {
+		return [[ getTags('span',[test1]).length,"===",2 ]];
+	},
+	"getTags('span',[test1,test2])": function () {
+		return [[ getTags('span',[test1,test2]).length,"===",4 ]];
+	},
+	"getTags('span',[test0,test1,test2])": function () {
+		return [[ getTags('span',[test0,test1,test2]).length,"===",5 ]];
+	},
+	"getTags('*',[test0])": function () {
+		return [[ getTags('*',[test0]).length,"===",11 ]];
+	},
+	"getTags('*',[test1])": function () {
+		return [[ getTags('*',[test1]).length,"===",3 ]];
+	},
+	"getTags('*',[test1,test2])": function () {
+		return [[ getTags('*',[test1,test2]).length,"===",6 ]];
+	},
+	"getTags('*',[test0,test1,test2])": function () {
+		return [[ getTags('*',[test0,test1,test2]).length,"===",11 ]];
+	}
+});
+
+utest("evalScript", {
+	"evalScript('var testnum=1;testfunc()')": function (test) {
+		var now = +new Date;
+		window["testfunc"+now] = function () {
+			test([[ window["testnum"+now],"===",1 ]]);
+		};
+		evalScript('var testnum'+now+'=1;testfunc'+now+'()');
+	}
+});
+
+/*
+utest("escapeRegExp", {
+	"escapeRegExp('.\t$')": function () {
+		return [[ escapeRegExp('.\t$'),"===",'\\.\t\\$']];
+	}
+});
+
+utest("andRegExp", {
+	"andRegExp(['foo'],'.')": function () {
+		return andRegExp(['foo'],'@').test("@foo@bar@baz@");
+	},
+	"!andRegExp(['foo'],'@')": function () {
+		return !andRegExp(['foo'],'@').test("@hoge@piyo@fuga@");
+	},
+	"andRegExp(['foo','bar'],'@')": function () {
+		return andRegExp(['foo','bar'],'@').test("@foo@bar@baz@");
+	},
+	"!andRegExp(['foo','bar'],'@')": function () {
+		return !andRegExp(['foo','bar'],'@').test("@hoge@piyo@fuga@");
+	},
+	"andRegExp(['foo','bar','baz'],'@')": function () {
+		return andRegExp(['foo','bar','baz'],'@').test("@foo@bar@baz@");
+	},
+	"!andRegExp(['foo','bar','baz'],'@')": function () {
+		return !andRegExp(['foo','bar','baz'],'@').test("@hoge@piyo@fuga@");
+	},
+	"!andRegExp(['foo','hoge'],'@')": function () {
+		return !andRegExp(['foo','hoge'],'@').test("@foo@bar@baz@");
+	}
+});
+*/
+
+var as_foo = andSearchInit(['foo'], "@"),
+    as_foo_bar = andSearchInit('foo bar', "@", /\s+/g),
+    as_foo_bar_baz = andSearchInit(['foo','bar','baz'], "@"),
+    as_foo_hoge = andSearchInit('foo hoge', "@", /\s+/g);
+
+utest("andSearch", {
+	"andSearchInit": function () {
+		return [
+			[as_foo,'===',['@foo@']],
+			[as_foo_bar,'===',['@foo@','@bar@']],
+			[as_foo_bar_baz,'===',['@foo@','@bar@','@baz@']],
+			[as_foo_hoge,'===',['@foo@','@hoge@']]
+		];
+	},
+	"andSearch('foo')": function () {
+		return andSearch("@foo@bar@baz@", as_foo);
+	},
+	"!andSearch('foo')": function () {
+		return !andSearch("@hoge@piyo@fuga@", as_foo);
+	},
+	"andSearch('foo','bar')": function () {
+		return andSearch("@foo@bar@baz@", as_foo_bar);
+	},
+	"!andSearch('foo','bar')": function () {
+		return !andSearch("@hoge@piyo@fuga@", as_foo_bar);
+	},
+	"andSearch('foo','bar','baz')": function () {
+		return andSearch("@foo@bar@baz@", as_foo_bar_baz);
+	},
+	"!andSearch('foo','bar','baz')": function () {
+		return !andSearch("@hoge@piyo@fuga@", as_foo_bar_baz);
+	},
+	"!andSearch('foo','hoge')": function () {
+		return !andSearch("@foo@bar@baz@", as_foo_hoge);
+	}
+});
+
+utest("getDocument", {
+	"getDocument(document).writeln": function () {
+		return !!getDocument(document).writeln;
+	},
+	"getDocument(document)": function () {
+		return [[ getDocument(document),"===",document ]];
+	},
+	"getDocument(test0).writeln": function () {
+		return !!getDocument(test0).writeln;
+	},
+	"getDocument(test0)": function () {
+		return [[ getDocument(test0),"===",document ]];
+	},
+	"getDocument(test0)!=": function () {
+		return [[ getDocument(test0),"!=",ifrdoc ]];
+	},
+	"getDocument(ifrspan).writeln": function () {
+		var ifrspan = ifrdoc.getElementsByTagName("span")[0];
+		return !!getDocument(ifrspan).writeln;
+	},
+	"getDocument(ifrspan)": function () {
+		var ifrspan = ifrdoc.getElementsByTagName("span")[0];
+		return [[ getDocument(ifrspan),"===",ifrdoc ]];
+	},
+	"getDocument(ifrspan)!=": function () {
+		var ifrspan = ifrdoc.getElementsByTagName("span")[0]
+		return [[ getDocument(ifrspan),"!=",document ]];
+	}
+});
+
+utest("getWindow", {
+	"getWindow(document).alert": function () {
+		return !!getWindow(document).alert;
+	},
+	"getWindow(document)": function () {
+		return [[ getWindow(document),"===",window ]];
+	},
+	"getWindow(document)==": function () {
+		return [[ getWindow(document),"==",window ]];
+	},
+	"getWindow(document)!=": function () {
+		return [[ getWindow(document),"!=",ifrwin ]];
+	},
+	"getWindow(ifrdoc).alert": function () {
+		return !!getWindow(ifrdoc).alert;
+	},
+	"getWindow(ifrdoc)": function () {
+		return [[ getWindow(ifrdoc),"===",ifrwin ]];
+	},
+	"getWindow(ifrdoc)==": function () {
+		return [[ getWindow(ifrdoc),"==",ifrwin ]];
+	},
+	"getWindow(ifrdoc)!=": function () {
+		return [[ getWindow(ifrdoc),"!=",window ]];
+	}
+});
+
+utest("toArray", {
+	"toArray()": function () {
+		return [[ toArray(),"===",[] ]];
+	},
+	"toArray(null)": function () {
+		return [[ toArray(null),"===",[] ]];
+	},
+	"toArray(false)": function () {
+		return [[ toArray(false),"===",[false] ]];
+	},
+	"toArray([true])": function () {
+		return [[ toArray([true]),"===",[true] ]];
+	},
+	"toArray('test')": function () {
+		return [[ toArray('test'),"===",['test'] ]];
+	},
+	"toArray(['test'])": function () {
+		return [[ toArray(['test']),"===",['test'] ]];
+	},
+	"toArray(window)": function () {
+		return [[ toArray(window),"===",[window] ]];
+	},
+	"toArray([window])": function () {
+		return [[ toArray([window]),"===",[window] ]];
+	},
+	"toArray(function(){})": function () {
+		var func = function(){};
+		return [[ toArray(func),"===",[func] ]];
+	},
+	"toArray(function(){})": function () {
+		var func = function(){};
+		return [[ toArray([func]),"===",[func] ]];
+	},
+	"toArray(test0)": function () {
+		return [[ toArray(test0),"===",[test0] ]];
+	},
+	"toArray([test0,test1,test2])": function () {
+		return [[ toArray([test0,test1,test2]),"===",[test0,test1,test2] ]];
+	},
+	"toArray([test0,test1,test2])": function () {
+		var code = document.getElementsByTagName("code");
+		return [[ toArray(code),"===",[code[0],code[1],code[2]] ]];
+	}
+});
+
+utest("$_fast_each", {
+	"$_fast_each": function () {
+		var sum = 0;
+		$_fast_each([1,2,3,4,5], function (i, x) {
+			sum += i * x;
+		}, 2);
+		return [[ sum, "===", 30 ]];
+	},
+	"$_fast_each - break": function () {
+		var sum = 0;
+		$_fast_each([1,2,3,4,5], function (i, x) {
+			sum += i * x;
+			if (i >= 3)
+				return false;
+		}, 2);
+		return [[ sum, "===", 12 ]];
+	}
+});
+
+}
+
+var cnt = 10;
+(function rec() {
+	if (window.ifr_loaded || !--cnt)
+		run();
+	else
+		setTimeout(rec, 200);
+})()
+
+
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>$.ajax</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<script type="text/javascript" src="../$.js"></script>
+</head>
+<body></body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+utest("$.ajax", {
+	text: function (test) {
+		$.ajax({
+			url: "data/text.txt",
+			dataType: "text",
+			success: function (data) {
+				test([[ data,'===','abc' ]]);
+			}
+		});
+	},
+	xml: function (test) {
+		$.ajax({
+			url: "data/xml.xml",
+			dataType: "xml",
+			success: function (data) {
+				test([
+					[ $("abc", data).length,'===',1 ],
+					[ $("def", data).length,'===',1 ],
+					[ $("def", data).attr("ghi"),'===',"jkl" ],
+					[ $("def", data).text(),'===',"mn" ]
+				]);
+			}
+		});
+	},
+	json: function (test) {
+		$.ajax({
+			url: "data/json.js",
+			dataType: "json",
+			success: function (data) {
+				test([
+					[ data.foo,'===','bar' ],
+					[ data.baz,'==',1 ]
+				]);
+			}
+		});
+	},
+	jsonp: function (test) {
+		$.ajax({
+			url: "data/jsonp.php?fn=?",
+			dataType: "jsonp",
+			success: function (data) {
+				test([[ data,'===',123 ]]);
+			}
+		});
+	},
+	script: function (test) {
+		$.ajax({
+			url: "data/script.js",
+			dataType: "script",
+			success: function () {
+				test(window.test_script);
+			}
+		});
+	}
+});
+</script>
+</html>

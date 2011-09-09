@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html class='defaultred test'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>:root</title>
+		
+		<style type='text/css'>
+			body { color: #fff; font-family: Arial, Helvetica, sans-serif; }
+			.base, .defaultgreen { background-color: #090; }
+			.defaultred { background-color: #900; }
+			pre { color: #000; background: #fff; padding: 0.5em; }
+			
+/*
+			:root {
+				background-color: #090;
+			}
+ */
+		</style>
+<script src="../$.js"></script><script src="selector.js"></script>
+<script>
+if (1)
+window.onload = function() {
+  CSSSelector(":root").forEach(function(v) {
+    v.style.backgroundColor = "#090";
+  });
+};
+</script>
+	</head>
+
+	<body>
+		<p>This page is part of the <a href="http://www.css3.info">CSS3.info</a> <a href="http://www.css3.info/selectors-test/">CSS selectors test</a>. See more info on <a href="http://www.css3.info/preview/attribute-selectors.html">CSS3 selectors</a>.</p>
+		
+		<div class='base'></div>
+	
+		<pre>:root {
+}
+
+&lt;html&gt;
+   &lt;body&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+		<p>
+			The CSS selector should match the HTML element, because it is the root element in a HTML document.
+		</p>
+	</body>
+</html>

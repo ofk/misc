@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>$.attr & $.css</title>
+<script type="text/javascript" src="../$.boost.js"></script>
+<script type="text/javascript" src="../$.js"></script>
+<style type="text/css">
+code {
+	color: blue;
+	margin: 2px;
+	border: 1px solid;
+	padding: 3px;
+	width: 10px;
+	height: 20px;
+	float: left;
+	font-size: 12pt;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	filter: alpha(opacity=50);
+	background: url("data/img.png") no-repeat 50% 25px;
+	display: block;
+}
+</style>
+</head>
+<body>
+<div id="box">
+
+<a href="http://example.com/" lang="en" style="color:red">example</a>
+<a href="data/iframe.html">iframe</a>
+<a href="#box">box</a>
+
+<form id="bf" action="#test">
+</form>
+
+<form id="tf" action="submit.php" method="get">
+<select name="tfs">
+	<option selected="selected">YES</option>
+	<option>NO</option>
+</select>
+</form>
+
+<img src="../test/data/img.png">
+
+<div id="tidx">
+	<ol tabindex="5">
+		<li tabindex="-1">Rice</li>
+		<li>Beans</li>
+	</ol>
+	<div></div>
+	<a href="#">A</a>
+	<a href="#" tabindex="2">B</a>
+	<a href="#" tabindex="-1">C</a>
+	<a>D</a>
+	<a tabindex="1">E</a>
+	<a tabindex="-1">F</a>
+	<a href="#">G</a>
+</div>
+
+<code>T</code>
+<code x="x"></code>
+
+</div>
+</body>
+<script type="text/javascript" src="utest.js"></script>
+<script type="text/javascript">
+var box = document.getElementById("box"),
+    tidx = document.getElementById("tidx"),
+    tidxol = tidx.getElementsByTagName("ol")[0],
+    tidxlis = tidx.getElementsByTagName("li"),
+    tidxdiv = tidx.getElementsByTagName("div")[0],
+    tidxas = tidx.getElementsByTagName("a"),
+    meta = document.getElementsByTagName("meta")[1],
+    links = box.getElementsByTagName("a"),
+    images = box.getElementsByTagName("img"),
+    options = box.getElementsByTagName("option"),
+    codes = box.getElementsByTagName("code");
+
+$_css_set(codes[1], {
+	'color':      'red',
+	'margin':     '20px',
+	'border':     '10px solid',
+	'padding':    '30px',
+	'width':      '60%',
+	'height':     'auto',
+	'float':      'right',
+	'font-size':  '22pt',
+	'opacity':    '0.8',
+	'background': 'url("data/img.png") no-repeat top left',
+	'display':    'inline'
+});
+
+utest("$.attr", {
+	"$.attr()": function () {
+		return !$.attr();
+	},
+	"$.attr(document)": function () {
+		return !$.attr(document);
+	},
+	"$.attr('lang')": function () {
+		return [[$.attr(links[0],'lang'),'===','en']];
+	},
+	"$.attr('style')": function () {
+		return /color/i.test($.attr(links[0],'style'));
+	},
+	"$.attr('http-equiv')": function () {
+		return [[$.attr(meta,'http-equiv'),'===','Content-Script-Type']];
+	},
+	"$.attr('selected') - 1": function () {
+		return [[$.attr(options[0],'selected'),'===',true]];
+	},
+	"$.attr('selected') - 2": function () {
+		return [[$.attr(options[1],'selected'),'===',false]];
+	},
+	"$.attr('href') - 1": function () {
+		return [[$.attr(links[0],'href'),'===','http://example.com/']];
+	},
+	"$.attr('href') - 2": function () {
+		return [[$.attr(links[1],'href'),'===','data/iframe.html']];
+	},
+	"$.attr('href') - 3": function () {
+		return [[$.attr(links[2],'href'),'===','#box']];
+	},
+	"$.attr('src')": function () {
+		return [[$.attr(images[0],'src'),'===','../test/data/img.png']];
+	},
+	"$.attr('action')": function () {
+		return [[$.attr(document.getElementById("bf"),'action'),'===','#test']];
+	},
+	"$.attr('method')": function () {
+		return [[$.attr(document.getElementById("bf"),'method'),'===','']];
+	},
+	"$.attr('action') - 2": function () {
+		return [[$.attr(document.getElementById("tf"),'action'),'===','submit.php']];
+	},
+	"$.attr('method') - 2": function () {
+		return [[$.attr(document.getElementById("tf"),'method'),'===','get']];
+	},
+	"$.attr('tabindex') - 1": function () {
+		return [[$.attr(tidxol,'tabindex'),'==',5]];
+	},
+	"$.attr('tabindex') - 2": function () {
+		return [[$.attr(tidxlis[0],'tabindex'),'==',-1]];
+	},
+	"$.attr('tabindex') - 3": function () {
+		return [[$.attr(tidxlis[1],'tabindex'),'==',null]];
+	},
+	"$.attr('tabindex') - 4": function () {
+		return [[$.attr(tidxdiv,'tabindex'),'==',null]];
+	},
+	"$.attr('tabindex') - 5": function () {
+		return [[$.attr(tidxas[0],'tabindex'),'==',0]];
+	},
+	"$.attr('tabindex') - 6": function () {
+		return [[$.attr(tidxas[1],'tabindex'),'==',2]];
+	},
+	"$.attr('tabindex') - 7": function () {
+		return [[$.attr(tidxas[2],'tabindex'),'==',-1]];
+	},
+	"$.attr('tabindex') - 8": function () {
+		return [[$.attr(tidxas[3],'tabindex'),'==',null]];
+	},
+	"$.attr('tabindex') - 9": function () {
+		return [[$.attr(tidxas[4],'tabindex'),'==',1]];
+	},
+	"$.attr('tabindex') - 10": function () {
+		return [[$.attr(tidxas[5],'tabindex'),'==',-1]];
+	},
+	"$.attr('tabindex') - 11": function () {
+		return [[$.attr(tidxas[6],'tabindex'),'==',0]];
+	},
+	"$.attr('x') - 1": function () {
+		return [[$.attr(codes[0],'x'),'==',null]];
+	},
+	"$.attr('x') - 2": function () {
+		return [[$.attr(codes[1],'x'),'===','x']];
+	}
+});
+
+utest("$.css.get", {
+	"$.css('color') - 1": function () {
+		return [[ $_fx.color($.css(codes[0],'color')),'===',[0,0,255] ]];
+	},
+	"$.css('width') - 1": function () {
+		return [[ $.css(codes[0],'width'),'===','10px' ]];
+	},
+	"$.css('height') - 1": function () {
+		return [[ $.css(codes[0],'height'),'===','20px' ]];
+	},
+	"$.css('float') - 1": function () {
+		return [[ $.css(codes[0],'float'),'===','left' ]];
+	},
+	"$.css('margin-top') - 1": function () {
+		return [[ $.css(codes[0],'margin-top'),'===','2px' ]];
+	},
+	"$.css('font-size') - 1": function () {
+		return [[ $.css(codes[0],'font-size'),'===','12pt' ]];
+	},
+	"$.css('opacity') - 1": function () {
+		return [[ $.css(codes[0],'opacity'),'===','0.5' ]];
+	},
+	"$.css('background-position') - 1": function () {
+		return [[ $.css(codes[0],'background-position'),'===','50% 25px' ]];
+	},
+	"$.css('background-position-x') - 1": function () {
+		return [[ $.css(codes[0],'background-position-x'),'===','50%' ]];
+	},
+	"$.css('background-position-y') - 1": function () {
+		return [[ $.css(codes[0],'background-position-y'),'===','25px' ]];
+	},
+	"$.css('display') - 1": function () {
+		return [[ $.css(codes[0],'display'),'===','block' ]];
+	}
+});
+
+utest("$.css.set", {
+	"$.css('color') - 2": function () {
+		return [[ $_fx.color($.css(codes[1],'color')),'===',[255,0,0] ]];
+	},
+	"$.css('width') - 2": function () {
+		return [[ $.css(codes[1],'width'),'===','60%' ]];
+	},
+	"$.css('height') - 2": function () {
+		return [[ $.css(codes[1],'height'),'===','auto' ]];
+	},
+	"$.css('float') - 2": function () {
+		return [[ $.css(codes[1],'float'),'===','right' ]];
+	},
+	"$.css('margin-top') - 2": function () {
+		return [[ $.css(codes[1],'margin-top'),'===','20px' ]];
+	},
+	"$.css('font-size') - 2": function () {
+		return [[ $.css(codes[1],'font-size'),'===','22pt' ]];
+	},
+	"$.css('opacity') - 2": function () {
+		return [[ $.css(codes[1],'opacity'),'===','0.8' ]];
+	},
+	"$.css('background-position') - 2": function () {
+		return [[ $.css(codes[1],'background-position'),'===','left top' ]];
+	},
+	"$.css('background-position-x') - 2": function () {
+		return [[ $.css(codes[1],'background-position-x'),'===','left' ]];
+	},
+	"$.css('background-position-y') - 2": function () {
+		return [[ $.css(codes[1],'background-position-y'),'===','top' ]];
+	},
+	"$.css('display') - 2": function () {
+		return [[ $.css(codes[1],'display'),'===','inline' ]];
+	}
+});
+
+</script>
+</html>
